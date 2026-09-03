@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nmap – Zer da eta nola erabili | TryHackMe Further Nmap</title>
+  <style>
+    :root {
+      --navy: #0b1628;
+      --navy-2: #122038;
+      --card: #162a45;
+      --card-border: #243a5c;
+      --teal: #2dd4bf;
+      --teal-dim: rgba(45, 212, 191, 0.15);
+      --coral: #fb7185;
+      --coral-dim: rgba(251, 113, 133, 0.15);
+      --amber: #fbbf24;
+      --text: #e8eef7;
+      --muted: #93a4bf;
+      --code-bg: #0a1220;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.45;
+      padding: 1.5rem;
+    }
+    .poster {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(165deg, var(--navy-2) 0%, var(--navy) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid var(--teal);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--teal-dim);
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      margin-bottom: .5rem;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    h1 span { color: var(--teal); }
+    .subtitle { color: var(--muted); margin-top: .35rem; font-size: .95rem; }
+    .meta {
+      text-align: right;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+    .meta strong { color: var(--coral); display: block; font-size: .95rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      color: var(--teal);
+      margin-bottom: .55rem;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .card h2 .icon {
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 8px;
+      background: var(--teal-dim);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+    .card.coral h2 { color: var(--coral); }
+    .card.coral h2 .icon { background: var(--coral-dim); }
+    .card p, .card li { color: var(--text); font-size: .92rem; }
+    .card ul { padding-left: 1.15rem; margin-top: .4rem; }
+    .card li { margin: .28rem 0; }
+    .card li strong { color: var(--amber); }
+    code, .cmd {
+      font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+      background: var(--code-bg);
+      color: var(--teal);
+      padding: .12rem .4rem;
+      border-radius: 5px;
+      font-size: .85em;
+      border: 1px solid var(--card-border);
+    }
+    .cmd-block {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: .9rem;
+      color: var(--teal);
+      margin: .55rem 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .cmd-block .comment { color: var(--muted); }
+    .states {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+      margin-top: .6rem;
+    }
+    @media (max-width: 640px) {
+      .states { grid-template-columns: 1fr; }
+    }
+    .state {
+      border-radius: 8px;
+      padding: .55rem .7rem;
+      text-align: center;
+      font-size: .85rem;
+      border: 1px solid transparent;
+    }
+    .state.open { background: rgba(45,212,191,.12); border-color: var(--teal); }
+    .state.closed { background: rgba(251,113,133,.12); border-color: var(--coral); }
+    .state.filtered { background: rgba(251,191,36,.12); border-color: var(--amber); color: var(--amber); }
+    .state strong { display: block; font-size: .95rem; margin-bottom: .15rem; }
+    .state.open strong { color: var(--teal); }
+    .state.closed strong { color: var(--coral); }
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: .55rem;
+      margin-top: .6rem;
+    }
+    .step {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: .65rem .7rem;
+      text-align: center;
+      position: relative;
+      font-size: .82rem;
+    }
+    .step .num {
+      display: inline-flex;
+      width: 1.5rem;
+      height: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: .75rem;
+      margin-bottom: .35rem;
+    }
+    .full { grid-column: 1 / -1; }
+    footer {
+      margin-top: 1.25rem;
+      padding-top: .85rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--muted);
+      font-size: .78rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+    footer em { color: var(--coral); font-style: normal; }
+    @media print {
+      body { background: #fff; color: #111; padding: .5cm; }
+      .poster {
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        max-width: none;
+      }
+      h1, .card h2, .badge, code, .cmd, .cmd-block { color: #0b3d3a !important; }
+      .card { background: #f5f7fa; border-color: #ccd; break-inside: avoid; }
+      .subtitle, .meta, footer, .card p, .card li { color: #222 !important; }
+      .state.open { background: #e6faf6; }
+      .state.closed { background: #fde8eb; }
+      .state.filtered { background: #fff6e0; color: #92400e; }
+      .cmd-block, code, .cmd, .step { background: #f0f2f5; border-color: #bbb; color: #0b3d3a; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header>
+      <div>
+        <span class="badge">Ethical Hacking · TryHackMe</span>
+        <h1><span>Nmap</span> – Zer da eta nola erabili</h1>
+        <p class="subtitle">Further Nmap gela · Sarearen mapa eraiki aurretik, ikasi oinarriak</p>
+      </div>
+      <div class="meta">
+        <strong>Infografia 1 / 2</strong>
+        Ikasgelako posterra · Inprimagarria
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2><span class="icon">🎯</span> Zer da Nmap?</h2>
+        <p>
+          <strong>Nmap</strong> (Network Mapper) sareak eta ostalariak <em>aurkitzeko</em> eta
+          <em>ataken egoera</em> aztertzeko tresna da. Ethical hacking-ean lehenengo urratsetako bat da:
+          zer dago bizirik, zer ataka irekita, eta zer zerbitzu dabil.
+        </p>
+        <ul>
+          <li>Ostalariak aurkitu (host discovery)</li>
+          <li>Ataka (port) eskaneatzea</li>
+          <li>Zerbitzu/OS detekzioa (aukeran)</li>
+          <li>Script-ekin (NSE) informazio gehiago</li>
+        </ul>
+      </section>
+
+      <section class="card coral">
+        <h2><span class="icon">🔌</span> Atakak: 0–65535</h2>
+        <p>TCP/UDP ataka bakoitza <strong>0–65535</strong> tartean dago (guztira <strong>65536</strong> ataka).</p>
+        <ul>
+          <li><strong>Well-known:</strong> <code>0–1023</code> (HTTP 80, SSH 22, HTTPS 443…)</li>
+          <li><strong>Registered:</strong> 1024–49151</li>
+          <li><strong>Dynamic/private:</strong> 49152–65535</li>
+        </ul>
+        <p style="margin-top:.5rem;color:var(--muted);font-size:.85rem;">
+          Nmap-ek, aukerarik gabe, ataka ohikoenak eskaneatzen ditu; denak nahi badituzu: <code>-p-</code>
+        </p>
+      </section>
+
+      <section class="card full">
+        <h2><span class="icon">📡</span> Ataka egoerak</h2>
+        <div class="states">
+          <div class="state open">
+            <strong>OPEN</strong>
+            Zerbitzu bat entzuten ari da. Konexioa onartzen da.
+          </div>
+          <div class="state closed">
+            <strong>CLOSED</strong>
+            Ataka iristen da, baina ez dago zerbitzurik entzuten.
+          </div>
+          <div class="state filtered">
+            <strong>FILTERED</strong>
+            Firewall / filtroak erantzuna blokeatzen du; egoera ez da ziurra.
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="icon">⌨️</span> Nola erabili</h2>
+        <p>Sintaxi orokorra:</p>
+        <div class="cmd-block">nmap [aukerak] TARGET</div>
+        <ul>
+          <li><strong>TARGET</strong> izan daiteke: IP, hostname, tartea edo CIDR</li>
+          <li>Adibidea: <code>nmap 10.10.12.15</code></li>
+          <li>Aukerak: eskaneatze mota, atakak, abiadura, irteera…</li>
+        </ul>
+      </section>
+
+      <section class="card coral">
+        <h2><span class="icon">🌐</span> CIDR adibidea</h2>
+        <p><code>10.10.12.13/29</code> azpisarea:</p>
+        <div class="cmd-block">10.10.12.8 – 10.10.12.15 <span class="comment">← 8 helbide</span></div>
+        <ul>
+          <li><code>/29</code> = 3 bit ostalarientzat → <strong>2³ = 8</strong> IP</li>
+          <li>Sareko helbidea: <code>10.10.12.8</code></li>
+          <li>Broadcast: <code>10.10.12.15</code></li>
+          <li>Erabilgarriak: 10.10.12.9 – 10.10.12.14</li>
+        </ul>
+        <div class="cmd-block">nmap 10.10.12.13/29</div>
+      </section>
+
+      <section class="card full">
+        <h2><span class="icon">🏫</span> Ikasgelako lan-fluxua (workflow)</h2>
+        <div class="workflow">
+          <div class="step">
+            <div class="num">1</div>
+            <strong>Ping sweep</strong><br>
+            <code>-sn</code> · nork dago bizirik?
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <strong>Ataka azkarra</strong><br>
+            ohiko atakak / <code>-F</code>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <strong>Zerbitzuak</strong><br>
+            <code>-sV</code> (+ <code>-sC</code>)
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <strong>OS / agresiboa</strong><br>
+            <code>-O</code> edo <code>-A</code>
+          </div>
+          <div class="step">
+            <div class="num">5</div>
+            <strong>Gorde emaitzak</strong><br>
+            <code>-oA izena</code>
+          </div>
+          <div class="step">
+            <div class="num">6</div>
+            <strong>NSE / vuln</strong><br>
+            <code>--script=vuln</code>
+          </div>
+        </div>
+        <p style="margin-top:.75rem;font-size:.88rem;color:var(--muted);">
+          ⚠️ Baimendutako laborategietan soilik (TryHackMe, zure VM-ak). Ez eskaneatu besteen sareak baimenik gabe.
+        </p>
+      </section>
+    </div>
+
+    <footer>
+      <span>Iturria: <em>TryHackMe – Further Nmap</em> · Hizkuntza: euskara</span>
+      <span>Infografia 2: eskaneatze motak, switch-ak, NSE eta firewall</span>
+    </footer>
+  </article>
+</body>
+</html>

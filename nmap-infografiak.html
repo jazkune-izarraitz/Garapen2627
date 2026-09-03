@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nmap infografiak · TryHackMe Further Nmap</title>
+  <style>
+    :root {
+      --navy: #0b1628;
+      --card: #162a45;
+      --border: #243a5c;
+      --teal: #2dd4bf;
+      --coral: #fb7185;
+      --text: #e8eef7;
+      --muted: #93a4bf;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .box {
+      max-width: 560px;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    h1 { font-size: 1.45rem; margin-bottom: .4rem; }
+    h1 span { color: var(--teal); }
+    p { color: var(--muted); font-size: .92rem; margin-bottom: 1.25rem; }
+    a.card-link {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: .75rem;
+      transition: border-color .15s, background .15s;
+    }
+    a.card-link:hover { border-color: var(--teal); background: rgba(45,212,191,.08); }
+    a.card-link.second:hover { border-color: var(--coral); background: rgba(251,113,133,.08); }
+    a.card-link strong { display: block; font-size: 1.05rem; margin-bottom: .25rem; }
+    a.card-link .n { color: var(--teal); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+    a.card-link.second .n { color: var(--coral); }
+    a.card-link span.desc { color: var(--muted); font-size: .85rem; }
+    .hint {
+      margin-top: 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: .85rem;
+    }
+    @media print {
+      body { background: #fff; color: #111; }
+      .box { border-color: #ccc; background: #fff; }
+      p, .hint, a.card-link span.desc { color: #333; }
+      a.card-link { color: #111; border-color: #bbb; }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1><span>Nmap</span> infografiak (HTML)</h1>
+    <p>TryHackMe Further Nmap · Euskara · Moodle / OneNote / inprimatzeko</p>
+    <a class="card-link" href="nmap-infografia-zer-da.html">
+      <span class="n">Infografia 1</span>
+      <strong>Zer da Nmap eta nola erabili</strong>
+      <span class="desc">Atakak, OPEN/CLOSED/FILTERED, CIDR, workflow</span>
+    </a>
+    <a class="card-link second" href="nmap-infografia-eskaneatze-motak.html">
+      <span class="n">Infografia 2</span>
+      <strong>Eskaneatze motak eta switch-ak</strong>
+      <span class="desc">-sT/-sS/-sU/-sN/-sF/-sX/-sn, NSE, firewall, -oA</span>
+    </a>
+    <p class="hint">
+      Irekitzeko: fitxategia nabigatzailean ireki.<br>
+      Inprimatzeko: Ctrl+P → “Atzeko planoko grafikoak” aktibatu nahi baduzu koloreekin.
+    </p>
+  </div>
+</body>
+</html>
