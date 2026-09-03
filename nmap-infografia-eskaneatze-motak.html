@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nmap – Eskaneatze motak eta switch-ak | TryHackMe Further Nmap</title>
+  <style>
+    :root {
+      --navy: #0b1628;
+      --navy-2: #122038;
+      --card: #162a45;
+      --card-border: #243a5c;
+      --teal: #2dd4bf;
+      --teal-dim: rgba(45, 212, 191, 0.15);
+      --coral: #fb7185;
+      --coral-dim: rgba(251, 113, 133, 0.15);
+      --amber: #fbbf24;
+      --text: #e8eef7;
+      --muted: #93a4bf;
+      --code-bg: #0a1220;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.45;
+      padding: 1.5rem;
+    }
+    .poster {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: linear-gradient(165deg, var(--navy-2) 0%, var(--navy) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid var(--coral);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--coral-dim);
+      color: var(--coral);
+      border: 1px solid var(--coral);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      margin-bottom: .5rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 3vw, 2.05rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    h1 span { color: var(--coral); }
+    .subtitle { color: var(--muted); margin-top: .35rem; font-size: .95rem; }
+    .meta { text-align: right; color: var(--muted); font-size: .8rem; }
+    .meta strong { color: var(--teal); display: block; font-size: .95rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .card h2 {
+      font-size: 1.02rem;
+      color: var(--teal);
+      margin-bottom: .55rem;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .card.coral h2 { color: var(--coral); }
+    .card h2 .icon {
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 8px;
+      background: var(--teal-dim);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+    .card.coral h2 .icon { background: var(--coral-dim); }
+    .card p, .card li { font-size: .88rem; }
+    .card ul { padding-left: 1.05rem; margin-top: .35rem; }
+    .card li { margin: .22rem 0; }
+    code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      background: var(--code-bg);
+      color: var(--teal);
+      padding: .1rem .35rem;
+      border-radius: 5px;
+      font-size: .82em;
+      border: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+      margin-top: .4rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .45rem .5rem;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+    th {
+      color: var(--amber);
+      font-weight: 700;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { width: 7.5rem; }
+    .pill {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .1rem .4rem;
+      border-radius: 4px;
+      margin-left: .25rem;
+      vertical-align: middle;
+    }
+    .pill.root { background: var(--coral-dim); color: var(--coral); }
+    .pill.tcp { background: var(--teal-dim); color: var(--teal); }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .5rem;
+    }
+    .tag {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: .3rem .55rem;
+      font-size: .78rem;
+      font-family: ui-monospace, Consolas, monospace;
+      color: var(--teal);
+    }
+    .full { grid-column: 1 / -1; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      td:first-child { width: auto; }
+    }
+    .cmd-block {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--coral);
+      border-radius: 8px;
+      padding: .65rem .9rem;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: .82rem;
+      color: var(--teal);
+      margin: .45rem 0;
+      overflow-x: auto;
+    }
+    footer {
+      margin-top: 1.25rem;
+      padding-top: .85rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--muted);
+      font-size: .78rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+    footer em { color: var(--teal); font-style: normal; }
+    @media print {
+      body { background: #fff; color: #111; padding: .4cm; }
+      .poster {
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        max-width: none;
+      }
+      h1, .card h2, .badge, code, .cmd-block, .tag { color: #0b3d3a !important; }
+      .card { background: #f5f7fa; border-color: #ccd; break-inside: avoid; }
+      .subtitle, .meta, footer, .card p, .card li, td { color: #222 !important; }
+      th { color: #92400e !important; }
+      code, .cmd-block, .tag { background: #f0f2f5; border-color: #bbb; }
+      table { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header>
+      <div>
+        <span class="badge">Ethical Hacking · TryHackMe</span>
+        <h1><span>Nmap</span> – Eskaneatze motak eta switch-ak</h1>
+        <p class="subtitle">Further Nmap gela · TCP/UDP/NULL/FIN/Xmas, NSE, firewall eta irteerak</p>
+      </div>
+      <div class="meta">
+        <strong>Infografia 2 / 2</strong>
+        Ikasgelako posterra · Inprimagarria
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card full">
+        <h2><span class="icon">🧪</span> Eskaneatze motak</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Switch</th>
+              <th>Izena</th>
+              <th>Zer egiten du</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-sT</code> <span class="pill tcp">TCP</span></td>
+              <td>TCP Connect</td>
+              <td>Konexio osoa (3-way handshake). Root beharrik ez. Zaratatsuagoa.</td>
+            </tr>
+            <tr>
+              <td><code>-sS</code> <span class="pill root">root</span></td>
+              <td>SYN Stealth</td>
+              <td>SYN paketea soilik; ez du handshake osatzen. Azkarragoa / “stealth”agoa. Root behar du.</td>
+            </tr>
+            <tr>
+              <td><code>-sU</code> <span class="pill root">root</span></td>
+              <td>UDP scan</td>
+              <td>UDP atakak. Motelagoa; DNS, SNMP, DHCP… aurkitzeko.</td>
+            </tr>
+            <tr>
+              <td><code>-sN</code> <span class="pill root">root</span></td>
+              <td>NULL scan</td>
+              <td>TCP flagik gabe. Firewall/IDS saihesteko teknikak (RFC 793).</td>
+            </tr>
+            <tr>
+              <td><code>-sF</code> <span class="pill root">root</span></td>
+              <td>FIN scan</td>
+              <td>FIN flag soilik. Antzeko helburua: filtroak/IDS.</td>
+            </tr>
+            <tr>
+              <td><code>-sX</code> <span class="pill root">root</span></td>
+              <td>Xmas scan</td>
+              <td>FIN + PSH + URG (paketea “argitu” egiten da). NULL/FIN bezala.</td>
+            </tr>
+            <tr>
+              <td><code>-sn</code></td>
+              <td>Ping sweep</td>
+              <td>Ostalariak aurkitu soilik; <strong>ez</strong> ataka eskaneatu. “Nork dago bizirik?”</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2><span class="icon">⚙️</span> Switch erabilgarriak</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td><code>-sV</code></td>
+              <td>Zerbitzu/bertsio detekzioa</td>
+            </tr>
+            <tr>
+              <td><code>-O</code></td>
+              <td>Sistema eragilea (OS) asmatu</td>
+            </tr>
+            <tr>
+              <td><code>-A</code></td>
+              <td>Agresiboa: OS + bertsio + script + traceroute</td>
+            </tr>
+            <tr>
+              <td><code>-vv</code></td>
+              <td>Irteera oso xehea (verbose²)</td>
+            </tr>
+            <tr>
+              <td><code>-p 22,80,443</code></td>
+              <td>Ataka zehatzak</td>
+            </tr>
+            <tr>
+              <td><code>-p-</code></td>
+              <td>Ataka guztiak (1–65535)</td>
+            </tr>
+            <tr>
+              <td><code>-T5</code></td>
+              <td>Timing: insane (oso azkarra; zaratatsua)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:.55rem;color:var(--muted);font-size:.82rem;">
+          Timing: <code>-T0</code> … <code>-T5</code> (paranoid → insane). Laborategian <code>-T4</code>/<code>-T5</code> ohikoak.
+        </p>
+      </section>
+
+      <section class="card coral">
+        <h2><span class="icon">💾</span> Emaitzak gorde</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td><code>-oN fitx</code></td>
+              <td>Irteera normala (gizakientzat)</td>
+            </tr>
+            <tr>
+              <td><code>-oG fitx</code></td>
+              <td>Greppable (script/grep erraza)</td>
+            </tr>
+            <tr>
+              <td><code>-oA izena</code></td>
+              <td>Hiru formatu: .nmap + .gnmap + .xml</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cmd-block">nmap -sS -sV -oA txostena 10.10.12.15</div>
+        <p style="font-size:.82rem;color:var(--muted);">Gomendioa ikasgelan: beti <code>-oA</code> erabili frogak/entregak gordetzeko.</p>
+      </section>
+
+      <section class="card full">
+        <h2><span class="icon">📜</span> NSE – Nmap Scripting Engine (Lua)</h2>
+        <div class="two-col">
+          <div>
+            <p>Script-ak Lua-n idatzita daude. Kokapena (Linux ohikoa):</p>
+            <div class="cmd-block">/usr/share/nmap/scripts/</div>
+            <p>Kategoria ohikoak:</p>
+            <div class="tags">
+              <span class="tag">auth</span>
+              <span class="tag">broadcast</span>
+              <span class="tag">brute</span>
+              <span class="tag">default</span>
+              <span class="tag">discovery</span>
+              <span class="tag">dos</span>
+              <span class="tag">exploit</span>
+              <span class="tag">external</span>
+              <span class="tag">fuzzer</span>
+              <span class="tag">intrusive</span>
+              <span class="tag">malware</span>
+              <span class="tag">safe</span>
+              <span class="tag">version</span>
+              <span class="tag">vuln</span>
+            </div>
+          </div>
+          <div>
+            <p>Adibideak:</p>
+            <div class="cmd-block">nmap --script=default TARGET</div>
+            <div class="cmd-block">nmap --script=vuln TARGET</div>
+            <div class="cmd-block">nmap --script "http*" -p 80,443 TARGET</div>
+            <ul>
+              <li><code>-sC</code> ≈ <code>--script=default</code></li>
+              <li><code>--script=vuln</code>: ahultasun-scriptak (kontuz, intrusive izan daiteke)</li>
+              <li>Script bakarra: <code>--script=banner</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card coral full">
+        <h2><span class="icon">🛡️</span> Firewall / IDS saihesteko aukerak</h2>
+        <div class="two-col">
+          <table>
+            <tbody>
+              <tr>
+                <td><code>-Pn</code></td>
+                <td>Ez egin host discovery (ping); tratatu ostalaria bizirik dagoela. Firewall-ek ICMP blokeatzen dutenean erabilgarria.</td>
+              </tr>
+              <tr>
+                <td><code>-f</code></td>
+                <td>Paketeak zatitu (fragment). IDS/firewall batzuk nahas ditzake.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <tbody>
+              <tr>
+                <td><code>--scan-delay 1s</code></td>
+                <td>Atzerapena paketeen artean; motelago = gutxiago “zaratatsu” / rate-limit saihestu.</td>
+              </tr>
+              <tr>
+                <td><code>--badsum</code></td>
+                <td>Checksum okerra. Firewall/IDS batzuek paketea botatzen dute; erantzunik ez = filtroa.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cmd-block">nmap -Pn -f --scan-delay 500ms -sS TARGET</div>
+      </section>
+
+      <section class="card full">
+        <h2><span class="icon">✅</span> Komando-txantiloiak (ikasgela)</h2>
+        <div class="two-col">
+          <div>
+            <div class="cmd-block">nmap -sn 10.10.12.0/24</div>
+            <div class="cmd-block">sudo nmap -sS -sV -vv -oA oinarria TARGET</div>
+            <div class="cmd-block">sudo nmap -sU --top-ports 20 TARGET</div>
+          </div>
+          <div>
+            <div class="cmd-block">nmap -Pn -p- -T4 TARGET</div>
+            <div class="cmd-block">nmap -A -oA agresiboa TARGET</div>
+            <div class="cmd-block">nmap --script=vuln -p 80,443 TARGET</div>
+          </div>
+        </div>
+        <p style="margin-top:.65rem;font-size:.85rem;color:var(--muted);">
+          ⚠️ Root behar duten eskaneatzeak (<code>-sS</code>, <code>-sU</code>, <code>-sN/F/X</code>, <code>-O</code>…): erabili
+          <code>sudo</code>. Beti baimendutako helburuetan.
+        </p>
+      </section>
+    </div>
+
+    <footer>
+      <span>Iturria: <em>TryHackMe – Further Nmap</em> · Hizkuntza: euskara</span>
+      <span>Infografia 1: zer da Nmap, atakak, CIDR eta workflow</span>
+    </footer>
+  </article>
+</body>
+</html>
