@@ -1,3 +1,5 @@
+package ariketa1;
+
 import java.io.File;
 
 /**
