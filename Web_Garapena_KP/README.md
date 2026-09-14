@@ -54,6 +54,14 @@ Nabigatzailea: http://localhost:8080/
 | `/?action=edit&id=1` | Editatu |
 | `/?action=logs` | `logs/app.log` ikusi |
 
+
+## Proba azkarra (agentearen emaitza)
+
+- Zerrenda: Ane, Mikel, Leire (+ Proba INSERT bidez)
+- `?action=show&id=1`: Ane Lopez xehetasuna
+- `?action=logs`: LOGIN/INSERT logak
+- Sortzean **argazkia derrigorrezkoa** da (`required` + balidazioa)
+
 ## Klasean azaltzeko puntuak
 
 1. **MVC**: Model (SQL) / Controller (logika) / View (HTML) bereizita.
