@@ -4,5 +4,5 @@ Irakaslea: Jazkune
 
 ## PHP + MySQL
 
-Ikasleei azaltzeko adibidea: [`php-mysql/`](php-mysql/) karpeta.
-Hasierako gida: [`php-mysql/README.md`](php-mysql/README.md).
+- Adibide sinplea (klasean hasteko): [`php-mysql/`](php-mysql/)
+- Kontrol puntua (Adei Belar – MVC osoa): [`Web_Garapena_KP/`](Web_Garapena_KP/)
