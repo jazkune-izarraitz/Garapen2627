@@ -65,8 +65,9 @@ def main() -> None:
 
     doc.add_heading("Entrega", level=1)
     doc.add_paragraph(
-        "Entregatu Word edo PDF dokumentu bat (izenburua adibidez: "
-        "Ezagutze_pasiboa_IzenaAbizena), honakoekin:"
+        "Entregatu Word dokumentu bat (.docx). "
+        "Izenburuaren adibidea: Ezagutze_pasiboa_IzenaAbizena.docx. "
+        "Dokumentuak honakoak izan behar ditu:"
     )
     for item in (
         "Aukeratutako domeinua eta zergatik aukeratu duzun (1–2 esaldi).",
