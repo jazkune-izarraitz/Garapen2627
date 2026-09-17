@@ -78,6 +78,7 @@ def main() -> None:
         "Komando bakoitzaren irteeraren zati garrantzitsua (ez derrigorrez dena).",
         "Beheko galderen erantzunak.",
         "Hosting / zerbitzari motari buruzko bilaketa (interneteko iturriak aipatuz).",
+        "Reverse IP: IP berean dauden beste domeinuak (tresna + zerrenda).",
         "Ondorio labur bat (zer ikasi duzun / zer aurkitu duzun).",
     ):
         doc.add_paragraph(item, style="List Number")
@@ -250,6 +251,53 @@ def main() -> None:
         lerroak=2,
     )
 
+    doc.add_paragraph().add_run(
+        "Hosting berean dauden beste domeinuak (Reverse IP)"
+    ).bold = True
+    doc.add_paragraph(
+        "Hosting-a (batez ere shared) aurkituta, galdera hau egin daiteke: "
+        "IP helbide berean beste zein domeinu daude? "
+        "Horri reverse IP lookup (IP alderantzikatuko bilaketa) deritzo."
+    )
+    doc.add_paragraph("Urratsak:")
+    for item in (
+        "dig edo nslookup-ekin lortu zure domeinuaren A erregistroko IP-a.",
+        "Interneten bilatu “reverse IP lookup” + IP hori "
+        "(adib. ViewDNS, SecurityTrails, HackerTarget…).",
+        "Zerrendan agertzen diren beste domeinuak idatzi (gutxienez 2–3, badaude).",
+    ):
+        doc.add_paragraph(item, style="List Number")
+
+    doc.add_paragraph("Kontuz:")
+    for item in (
+        "Shared hosting-ean askotan webgune asko IP berean daude (ez dute zertan loturarik eduki).",
+        "CDN batekin (Cloudflare, etab.) IP berean milaka domeinu ager daitezke; "
+        "horrek ez du esan nahi hosting “auzo” bera direnik.",
+        "Dedicated / VPS bakarrean, berriz, domeinu gutxi (edo bakarra) ager daiteke.",
+    ):
+        doc.add_paragraph(item, style="List Bullet")
+
+    galdera(doc, "4.5", "Zure domeinuaren IP helbidea (A erregistroa):")
+    galdera(
+        doc,
+        "4.6",
+        "Reverse IP bilaketan, IP berean aurkitutako beste domeinuak "
+        "(2–3 gutxienez, badaude; bestela azaldu zergatik gutxi dauden):",
+        lerroak=3,
+    )
+    galdera(
+        doc,
+        "4.7",
+        "Erabilitako reverse IP tresna / URL:",
+    )
+    galdera(
+        doc,
+        "4.8",
+        "Galderatxoa: zergatik ez da zuzena pentsatzea IP bereko domeinu guztiak "
+        "enpresa berarenak direla?",
+        lerroak=2,
+    )
+
     # --- Hiruren inguruko galderak ---
     doc.add_heading("5. Hiru tresnen inguruko galderatxoak", level=1)
     galdera(
@@ -325,6 +373,16 @@ def main() -> None:
             "4.4",
             "Baliabideak partekatzen dira: auzoko bezero baten ahultasunak "
             "eragina izan dezake; gainera, askotan konfigurazio eta isolamendu ahulagoa.",
+        ),
+        (
+            "4.5–4.7",
+            "Reverse IP: dig/nslookup → IP → web reverse-IP tresna. "
+            "Emaitzak ikaslearen domeinuaren arabera.",
+        ),
+        (
+            "4.8",
+            "Shared hosting eta CDN-etan IP berean webgune asko egoten dira, "
+            "askotan jabego ezberdinekin. Ko-lokazioa pista da, ez froga.",
         ),
         (
             "5.1",
