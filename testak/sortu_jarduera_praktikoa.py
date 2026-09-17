@@ -53,7 +53,10 @@ def main() -> None:
 
     azpi = doc.add_paragraph()
     azpi.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = azpi.add_run("whois · nslookup · dig\nIkasleak aukeratutako domeinu batekin")
+    r = azpi.add_run(
+        "whois · nslookup · dig · hosting mota (interneten bilatu)\n"
+        "Ikasleak aukeratutako domeinu batekin"
+    )
     r.italic = True
 
     doc.add_heading("Helburua", level=1)
@@ -74,6 +77,7 @@ def main() -> None:
         "Exekutatutako komando bakoitza (kopiatu-itsatsi).",
         "Komando bakoitzaren irteeraren zati garrantzitsua (ez derrigorrez dena).",
         "Beheko galderen erantzunak.",
+        "Hosting / zerbitzari motari buruzko bilaketa (interneteko iturriak aipatuz).",
         "Ondorio labur bat (zer ikasi duzun / zer aurkitu duzun).",
     ):
         doc.add_paragraph(item, style="List Number")
@@ -196,41 +200,91 @@ def main() -> None:
         "Galderatxoa: dig @8.8.8.8 DOMEINUA A komandoan, zer adierazten du @8.8.8.8 zatiak?",
     )
 
-    # --- Hiruren inguruko galderak ---
-    doc.add_heading("4. Hiru tresnen inguruko galderatxoak", level=1)
+    # --- Hosting / zerbitzari mota (interneten bilatu) ---
+    doc.add_heading("4. Zerbitzari / hosting mota (interneten bilatu)", level=1)
+    doc.add_paragraph(
+        "Webguneak hosting mota desberdinetan egon daitezke, adibidez:"
+    )
+    for item in (
+        "Shared hosting (ostatze partekatua) – makina bera bezero askoren artean.",
+        "VPS (Virtual Private Server) – makina birtuala, baliabide propioagoak.",
+        "Dedicated – zerbitzari fisiko osoa bezero bakar batentzat.",
+        "Cloud / CDN – hodeiko azpiegitura edo edukia banatzeko sarea "
+        "(adib. Cloudflare, AWS, Azure…).",
+    ):
+        doc.add_paragraph(item, style="List Bullet")
+
+    doc.add_paragraph(
+        "Zure domeinuari buruzko pistak erabili (WHOIS-eko registrar, name-zerbitzariak, "
+        "IP-aren jabea…) eta bilatu Interneten hosting / zerbitzari mota. "
+        "Adibideak: hosting-en dokumentazioa, “who hosts”, IP/ASN bilatzaileak, "
+        "enpresaren “about / hosting” orriak. Aipatu erabilitako iturria."
+    )
+    doc.add_paragraph(
+        "Oharra: batzuetan ez da %100 ziurra; azaldu zure hipotesia eta zertan oinarritu zaren."
+    )
+
     galdera(
         doc,
         "4.1",
+        "Zure ustez, zer motatako hosting / zerbitzaria da? "
+        "(shared, VPS, dedicated, cloud/CDN, beste…)",
+    )
+    galdera(
+        doc,
+        "4.2",
+        "Zertan oinarritu zara? (NS izenak, IP/hornitzailea, web bilaketa…)",
+        lerroak=2,
+    )
+    galdera(
+        doc,
+        "4.3",
+        "Erabilitako Interneteko iturria(k) (URL edo tresnaren izena):",
+        lerroak=2,
+    )
+    galdera(
+        doc,
+        "4.4",
+        "Galderatxoa: shared hosting batean, zergatik izan daiteke arriskutsuagoa "
+        "edo interesgarriagoa erasotzaile batentzat (ideiaz, labur)?",
+        lerroak=2,
+    )
+
+    # --- Hiruren inguruko galderak ---
+    doc.add_heading("5. Hiru tresnen inguruko galderatxoak", level=1)
+    galdera(
+        doc,
+        "5.1",
         "Zergatik jotzen dira whois, nslookup eta dig kontsulta hauek ezagutze pasibotzat?",
         lerroak=2,
     )
     galdera(
         doc,
-        "4.2",
+        "5.2",
         "Zein tresnak ematen ditu domeinuaren erregistro-datuak (data, registrar…), "
         "eta zeinek DNS erregistroak (A, MX, TXT…)?",
         lerroak=2,
     )
     galdera(
         doc,
-        "4.3",
+        "5.3",
         "nslookup eta dig artean, zein gomendatuko zenuke gaur egun eta zergatik?",
         lerroak=2,
     )
     galdera(
         doc,
-        "4.4",
+        "5.4",
         "Adibide bat: zer litzateke ezagutze AKTIBOA egoera berean? "
         "(ez egin; azaldu soilik)",
         lerroak=2,
     )
 
     # --- Ondorioa ---
-    doc.add_heading("5. Ondorioa", level=1)
+    doc.add_heading("6. Ondorioa", level=1)
     doc.add_paragraph(
-        "Idatzi 4–6 esalditan: zer aurkitu duzun zure domeinuari buruz, "
-        "zer tresna izan den erabilgarriena zuretzat, eta zer kontuz ibili "
-        "behar den informazio publikoa bilatzean."
+        "Idatzi 4–6 esalditan: zer aurkitu duzun zure domeinuari buruz "
+        "(tresnak + hosting mota), zer izan den erabilgarriena, eta zer kontuz "
+        "ibili behar den informazio publikoa bilatzean."
     )
     for _ in range(5):
         doc.add_paragraph("_______________________________________________")
@@ -239,8 +293,8 @@ def main() -> None:
     ohar = doc.add_paragraph()
     ohar.add_run("Ebaluazio-iradokizuna (irakaslea): ").bold = True
     ohar.add_run(
-        "domeinu propioa · hiru tresnak erabili · komandoak + irteerak · "
-        "galderak erantzunda · ondorioa."
+        "domeinu propioa · hiru tresnak · hosting mota + iturria · "
+        "komandoak + irteerak · galderak · ondorioa."
     )
 
     # --- Irakaslearen gida ---
@@ -262,20 +316,31 @@ def main() -> None:
             "Kontsulta 8.8.8.8 DNS zerbitzariari (Google DNS) bidaltzen zaiola.",
         ),
         (
-            "4.1",
+            "4.1–4.3",
+            "Ikaslearen arabera (shared / VPS / dedicated / cloud-CDN…). "
+            "Egiaztatu hipotesia + iturria aipatu dituen. Cloudflare NS = CDN/proxy "
+            "pista ohikoa; ez nahastu “registrar” eta “hosting”.",
+        ),
+        (
+            "4.4",
+            "Baliabideak partekatzen dira: auzoko bezero baten ahultasunak "
+            "eragina izan dezake; gainera, askotan konfigurazio eta isolamendu ahulagoa.",
+        ),
+        (
+            "5.1",
             "Iturri publikoak kontsultatzen dira; ez zaio paketerik bidaltzen "
             "helburuko ostalariari zuzenean.",
         ),
         (
-            "4.2",
+            "5.2",
             "WHOIS → erregistro-datuak. nslookup eta dig → DNS erregistroak.",
         ),
         (
-            "4.3",
+            "5.3",
             "dig: irteera argiagoa, TTL, scripting. nslookup: bateragarritasuna.",
         ),
         (
-            "4.4",
+            "5.4",
             "Adib.: nmap, ping, direktorio-brute force, helburuarekin interakzio zuzena…",
         ),
     ]
