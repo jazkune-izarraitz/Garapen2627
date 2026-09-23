@@ -1,0 +1,23 @@
+$ recon-ng
+[recon-ng][nire_helburua] > workspaces create nire_helburua
+[recon-ng][nire_helburua] > marketplace install recon/domains-hosts/hackertarget
+[*] Module installed: recon/domains-hosts/hackertarget
+[recon-ng][nire_helburua] > modules load recon/domains-hosts/hackertarget
+[recon-ng][nire_helburua][hackertarget] > options set SOURCE example.com
+SOURCE => example.com
+[recon-ng][nire_helburua][hackertarget] > run
+
+-----------
+EXAMPLE.COM
+-----------
+[*] Host: example.com
+[*] Ip_Address: 172.66.147.243
+[*] --------------------------------------------------
+[*] Host: www.example.com
+[*] Ip_Address: 104.20.23.154
+[*] --------------------------------------------------
+
+-------
+SUMMARY
+-------
+[*] 2 total (2 new) hosts found.
