@@ -1,0 +1,1530 @@
+Script started on 2026-09-23 06:30:56+00:00 [COMMAND="/home/ubuntu/tools/recon-ng/recon-ng --no-version --no-analytics -r /workspace/he-ezagutzea/recon-ng-testa/logs/saioa-ossoa.rc" <not executed on terminal>]
+[32m[*][m Version check disabled.
+
+    _/_/_/    _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/
+   _/    _/  _/        _/        _/      _/  _/_/    _/            _/_/    _/  _/       
+  _/_/_/    _/_/_/    _/        _/      _/  _/  _/  _/  _/_/_/_/  _/  _/  _/  _/  _/_/_/
+ _/    _/  _/        _/        _/      _/  _/    _/_/            _/    _/_/  _/      _/ 
+_/    _/  _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/    
+
+
+                                          /\
+                                         / \\ /\
+    Sponsored by...               /\  /\/  \\V  \/\
+                                 / \\/ // \\\\\ \\ \/\
+                                // // BLACK HILLS \/ \\
+                               www.blackhillsinfosec.com
+
+                  ____   ____   ____   ____ _____ _  ____   ____  ____
+                 |____] | ___/ |____| |       |   | |____  |____ |
+                 |      |   \_ |    | |____   |   |  ____| |____ |____
+                                   www.practisec.com
+
+                      [33m[recon-ng v5.1.2, Tim Tomes (@lanmaster53)][m                       
+
+[34m[1] Recon modules[m
+
+[recon-ng][default] > workspaces create nire_helburua
+[recon-ng][nire_helburua] > workspaces list
+
+  +-------------------------------------+
+  |   Workspaces  |       Modified      |
+  +-------------------------------------+
+  | default       | 2026-09-23 06:30:27 |
+  | nire_helburua | 2026-09-23 06:30:27 |
+  +-------------------------------------+
+
+[recon-ng][nire_helburua] > marketplace install recon/domains-hosts/hackertarget
+[34m[*][m Module installed: recon/domains-hosts/hackertarget
+[34m[*][m Reloading modules...
+[recon-ng][nire_helburua] > marketplace install recon/domains-hosts/certificate_transparency
+[34m[*][m Module installed: recon/domains-hosts/certificate_transparency
+[34m[*][m Reloading modules...
+[recon-ng][nire_helburua] > marketplace install reporting/csv
+[34m[*][m Module installed: reporting/csv
+[34m[*][m Reloading modules...
+[recon-ng][nire_helburua] > marketplace install reporting/json
+[34m[*][m Module installed: reporting/json
+[34m[*][m Reloading modules...
+[recon-ng][nire_helburua] > modules search
+
+  Recon
+  -----
+    recon/domains-hosts/certificate_transparency
+    recon/domains-hosts/hackertarget
+
+  Reporting
+  ---------
+    reporting/csv
+    reporting/json
+
+[recon-ng][nire_helburua] > modules load recon/domains-hosts/hackertarget
+[recon-ng][nire_helburua][hackertarget] > info
+
+      Name: HackerTarget Lookup
+    Author: Michael Henriksen (@michenriksen)
+   Version: 1.1
+
+Description:
+  Uses the HackerTarget.com API to find host names. Updates the 'hosts' table with the results.
+
+Options:
+  Name    Current Value  Required  Description
+  ------  -------------  --------  -----------
+  SOURCE  example.com    yes       source of input (see 'info' for details)
+
+Source Options:
+  default        SELECT DISTINCT domain FROM domains WHERE domain IS NOT NULL
+  <string>       string representing a single input
+  <path>         path to a file containing a list of inputs
+  query <sql>    database query returning one column of inputs
+
+[recon-ng][nire_helburua][hackertarget] > options set SOURCE example.com
+SOURCE => example.com
+[recon-ng][nire_helburua][hackertarget] > run
+
+-----------
+EXAMPLE.COM
+-----------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: 104.20.23.154
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+
+-------
+SUMMARY
+-------
+[34m[*][m 1 total (0 new) hosts found.
+[recon-ng][nire_helburua][hackertarget] > back
+[recon-ng][nire_helburua] > modules load recon/domains-hosts/certificate_transparency
+[recon-ng][nire_helburua][certificate_transparency] > info
+
+      Name: Certificate Transparency Search
+    Author: Rich Warren (richard.warren@nccgroup.trust)
+   Version: 1.3
+
+Description:
+  Searches certificate transparency data from crt.sh, adding newly identified hosts to the hosts
+  table.
+
+Options:
+  Name    Current Value  Required  Description
+  ------  -------------  --------  -----------
+  SOURCE  default        yes       source of input (see 'info' for details)
+
+Source Options:
+  default        SELECT DISTINCT domain FROM domains WHERE domain IS NOT NULL
+  <string>       string representing a single input
+  <path>         path to a file containing a list of inputs
+  query <sql>    database query returning one column of inputs
+
+Comments:
+  * A longer global TIMEOUT setting may be required for larger domains.
+
+[recon-ng][nire_helburua][certificate_transparency] > options set SOURCE example.com
+SOURCE => example.com
+[recon-ng][nire_helburua][certificate_transparency] > run
+
+-----------
+EXAMPLE.COM
+-----------
+[32m[*][m Country: None
+[32m[*][m Host: *.example.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Email: user@example.com
+[32m[*][m First_Name: None
+[32m[*][m Last_Name: None
+[32m[*][m Middle_Name: None
+[32m[*][m Notes: None
+[32m[*][m Phone: None
+[32m[*][m Region: None
+[32m[*][m Title: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: AS207960
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: Test
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: Intermediate
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: -
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: dev.example.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: products.example.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: support.example.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: *.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: m.example.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Host: m.testexample.com
+[32m[*][m Ip_Address: None
+[32m[*][m Latitude: None
+[32m[*][m Longitude: None
+[32m[*][m Notes: None
+[32m[*][m Region: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: www.example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[32m[*][m Country: None
+[32m[*][m Email: subjectname@example.com
+[32m[*][m First_Name: None
+[32m[*][m Last_Name: None
+[32m[*][m Middle_Name: None
+[32m[*][m Notes: None
+[32m[*][m Phone: None
+[32m[*][m Region: None
+[32m[*][m Title: None
+[32m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Email: subjectname@example.com
+[34m[*][m First_Name: None
+[34m[*][m Last_Name: None
+[34m[*][m Middle_Name: None
+[34m[*][m Notes: None
+[34m[*][m Phone: None
+[34m[*][m Region: None
+[34m[*][m Title: None
+[34m[*][m --------------------------------------------------
+[34m[*][m Country: None
+[34m[*][m Host: example.com
+[34m[*][m Ip_Address: None
+[34m[*][m Latitude: None
+[34m[*][m Longitude: None
+[34m[*][m Notes: None
+[34m[*][m Region: None
+[34m[*][m --------------------------------------------------
+
+-------
+SUMMARY
+-------
+[32m[*][m 159 total (10 new) hosts found.
+[32m[*][m 3 total (2 new) contacts found.
+[recon-ng][nire_helburua][certificate_transparency] > back
+[recon-ng][nire_helburua] > show hosts
+
+  +----------------------------------------------------------------------------------------------------------------------------+
+  | rowid |         host         |   ip_address   | region | country | latitude | longitude | notes |          module          |
+  +----------------------------------------------------------------------------------------------------------------------------+
+  | 1     | example.com          | 172.66.147.243 |        |         |          |           |       | hackertarget             |
+  | 2     | www.example.com      | 104.20.23.154  |        |         |          |           |       | hackertarget             |
+  | 3     | *.example.com        |                |        |         |          |           |       | certificate_transparency |
+  | 4     | AS207960             |                |        |         |          |           |       | certificate_transparency |
+  | 5     | Test                 |                |        |         |          |           |       | certificate_transparency |
+  | 6     | Intermediate         |                |        |         |          |           |       | certificate_transparency |
+  | 7     | -                    |                |        |         |          |           |       | certificate_transparency |
+  | 8     | dev.example.com      |                |        |         |          |           |       | certificate_transparency |
+  | 9     | products.example.com |                |        |         |          |           |       | certificate_transparency |
+  | 10    | support.example.com  |                |        |         |          |           |       | certificate_transparency |
+  | 11    | m.example.com        |                |        |         |          |           |       | certificate_transparency |
+  | 12    | m.testexample.com    |                |        |         |          |           |       | certificate_transparency |
+  +----------------------------------------------------------------------------------------------------------------------------+
+
+[34m[*][m 12 rows returned
+[recon-ng][nire_helburua] > dashboard
+
+  +-----------------------------------------------------+
+  |                   Activity Summary                  |
+  +-----------------------------------------------------+
+  |                    Module                    | Runs |
+  +-----------------------------------------------------+
+  | recon/domains-hosts/certificate_transparency | 1    |
+  | recon/domains-hosts/hackertarget             | 3    |
+  +-----------------------------------------------------+
+
+
+  +----------------------------+
+  |      Results Summary       |
+  +----------------------------+
+  |     Category    | Quantity |
+  +----------------------------+
+  | Domains         | 0        |
+  | Companies       | 0        |
+  | Netblocks       | 0        |
+  | Locations       | 0        |
+  | Vulnerabilities | 0        |
+  | Ports           | 0        |
+  | Hosts           | 12       |
+  | Contacts        | 2        |
+  | Credentials     | 0        |
+  | Leaks           | 0        |
+  | Pushpins        | 0        |
+  | Profiles        | 0        |
+  | Repositories    | 0        |
+  +----------------------------+
+
+[recon-ng][nire_helburua] > modules load reporting/csv
+[recon-ng][nire_helburua][csv] > info
+
+      Name: CSV File Creator
+    Author: Tim Tomes (@lanmaster53)
+   Version: 1.0
+
+Description:
+  Creates a CSV file containing the specified harvested data.
+
+Options:
+  Name      Current Value                                                Required  Description
+  --------  -------------                                                --------  -----------
+  FILENAME  /home/ubuntu/.recon-ng/workspaces/nire_helburua/results.csv  yes       path and filename for output
+  HEADERS   False                                                        yes       include column headers
+  TABLE     hosts                                                        yes       source table of data to export
+
+[recon-ng][nire_helburua][csv] > options set FILENAME /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.csv
+FILENAME => /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.csv
+[recon-ng][nire_helburua][csv] > options set TABLE hosts
+TABLE => hosts
+[recon-ng][nire_helburua][csv] > run
+[34m[*][m 12 records added to '/workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.csv'.
+[recon-ng][nire_helburua][csv] > back
+[recon-ng][nire_helburua] > modules load reporting/json
+[recon-ng][nire_helburua][json] > options set FILENAME /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.json
+FILENAME => /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.json
+[recon-ng][nire_helburua][json] > options set TABLE hosts
+[31m[!] Invalid option name.[m
+[recon-ng][nire_helburua][json] > run
+[34m[*][m 14 records added to '/workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.json'.
+[recon-ng][nire_helburua][json] > back
+[recon-ng][nire_helburua] > exit
+
+Script done on 2026-09-23 06:31:03+00:00 [COMMAND_EXIT_CODE="0"]

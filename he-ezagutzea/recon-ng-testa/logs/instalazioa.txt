@@ -1,0 +1,10 @@
+# recon-ng instalazioa — Ubuntu 24.04 (ez Kali)
+# Iturria: https://github.com/lanmaster53/recon-ng/wiki/Getting-Started
+
+git clone https://github.com/lanmaster53/recon-ng.git ~/tools/recon-ng
+cd ~/tools/recon-ng
+pip3 install -r REQUIREMENTS   # erabiltzailearen site-packages
+./recon-ng --version           # 5.1.2
+
+# Wrapper:
+# ~/.local/bin/recon-ng -> ~/tools/recon-ng/recon-ng
