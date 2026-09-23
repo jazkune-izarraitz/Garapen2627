@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>recon-ng laborategia — OSINT txostena</title>
+  <style>
+    :root {
+      --ink: #1a2332;
+      --muted: #4a5568;
+      --line: #d5dbe6;
+      --bg: #f7f5f0;
+      --card: #ffffff;
+      --accent: #0d6e6e;
+      --accent-soft: #e6f3f3;
+      --warn: #8a5a00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans", "DejaVu Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 400px at 10% -10%, #dfecec 0%, transparent 55%),
+        linear-gradient(180deg, #ebe7df 0%, var(--bg) 28%, #f3f1ec 100%);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    header.hero {
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    header.hero p.meta {
+      color: var(--muted);
+      margin: 0.35rem 0 0;
+      font-size: 0.95rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    h2 {
+      margin-top: 2.4rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.65rem;
+    }
+    h3 { margin-top: 1.4rem; font-size: 1.05rem; }
+    p, li { color: var(--ink); }
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d6d6;
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+    .warn {
+      background: #fff7e8;
+      border: 1px solid #e6c988;
+      color: var(--warn);
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
+    }
+    pre, code {
+      font-family: "JetBrains Mono", "Fira Code", "DejaVu Sans Mono", monospace;
+      font-size: 0.86rem;
+    }
+    pre {
+      background: #15202b;
+      color: #e8eef5;
+      padding: 1rem 1.1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+    figure {
+      margin: 1.2rem 0 1.8rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.75rem;
+      box-shadow: 0 1px 0 rgba(26,35,50,0.04);
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid #e8ecf2;
+    }
+    figcaption {
+      margin-top: 0.55rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      margin: 0.8rem 0 1.2rem;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #eef3f3; }
+    .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    ol.steps > li { margin-bottom: 0.45rem; }
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <span class="tag">HE · Ezagutzea / OSINT</span>
+    <h1>recon-ng laborategia</h1>
+    <p class="meta">
+      Hacking etikoa · Ubuntu 24.04 · recon-ng v5.1.2 · Helburua: <strong>example.com</strong>
+    </p>
+    <p class="meta">Data: 2026-09-23</p>
+  </header>
+
+  <section>
+    <h2>1. Helburua eta etika</h2>
+    <p>
+      Tresna CLI baten instalazioa, nabigazioa (<em>Workspaces → Modules</em>) eta
+      domeinu baten gainean OSINT bilaketa pasiboa dokumentatzea. Emaitzak
+      fitxategira esportatu eta pantaila-argazkiekin txostena osatu.
+    </p>
+    <div class="warn">
+      <strong>Etika:</strong> iturri publikoak soilik. Helburua
+      <code>example.com</code> (IANA / dokumentaziorako domeinu erreserbatua).
+      API key-ak ez dira txostenean agertzen (ez dira erabili).
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Instalazioa (Ubuntu 24.04, ez Kali)</h2>
+    <p>
+      Kali-ko <code>apt install recon-ng</code> ez dago Ubuntu estandarrean.
+      Ofizialki <a href="https://github.com/lanmaster53/recon-ng/wiki/Getting-Started">wiki</a>ren
+      <em>Installing from Source</em> urratsak jarraitu dira:
+    </p>
+<pre># 1) Klona
+git clone https://github.com/lanmaster53/recon-ng.git ~/tools/recon-ng
+cd ~/tools/recon-ng
+
+# 2) Dependentsiak
+pip3 install -r REQUIREMENTS
+
+# 3) Abiarazi
+./recon-ng --version   # → 5.1.2</pre>
+    <figure>
+      <img src="pantailak/01-instalazioa-bertsioa.png" alt="recon-ng 5.1.2 bertsioa terminalan" />
+      <figcaption>
+        1. irudia — Instalazioa egiaztatuta: recon-ng <strong>5.1.2</strong>,
+        iturburua <code>~/tools/recon-ng</code>.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>3. Nabigazioa: Workspaces → Modules</h2>
+    <p>
+      recon-ng-n bi maila nagusi daude. Lehenik <strong>workspace</strong> bat
+      (proiektua / helburua) sortzen da; ondoren <strong>moduluak</strong>
+      marketplace-tik instalatu eta kargatzen dira.
+    </p>
+    <ol class="steps">
+      <li><code>workspaces create nire_helburua</code> — proiektua / DB bereizia</li>
+      <li><code>marketplace install recon/domains-hosts/hackertarget</code></li>
+      <li><code>modules load recon/domains-hosts/hackertarget</code></li>
+      <li><code>options set SOURCE example.com</code> → <code>run</code></li>
+      <li><code>show hosts</code> → emaitzak ikusi</li>
+      <li><code>modules load reporting/csv</code> → CSV esportatu (v5)</li>
+    </ol>
+
+    <h3>3.1 Workspace</h3>
+<pre>workspaces list
+workspaces create nire_helburua
+workspaces list</pre>
+    <figure>
+      <img src="pantailak/02-workspaces.png" alt="workspaces create nire_helburua" />
+      <figcaption>
+        2. irudia — <code>nire_helburua</code> workspace-a sortu eta zerrendatu.
+        Prompt-a <code>[recon-ng][nire_helburua]</code> bihurtzen da.
+      </figcaption>
+    </figure>
+
+    <h3>3.2 Moduluak (marketplace → load)</h3>
+<pre>marketplace search hackertarget
+marketplace install recon/domains-hosts/hackertarget
+modules load recon/domains-hosts/hackertarget
+info</pre>
+    <figure>
+      <img src="pantailak/03-moduluak-kargatu.png" alt="hackertarget modulua kargatuta" />
+      <figcaption>
+        3. irudia — HackerTarget modulua instalatu/kargatu. API key gabe
+        funtzionatzen du (K zutabea hutsik). <code>SOURCE = example.com</code>.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>4. Exekuzioa eta esportazioa</h2>
+    <p>
+      Bi modulu exekutatu dira <code>example.com</code> gainean (API key gabe):
+    </p>
+    <ul>
+      <li><code>recon/domains-hosts/hackertarget</code> — hostak + IP</li>
+      <li><code>recon/domains-hosts/certificate_transparency</code> — CT logetako izenak</li>
+    </ul>
+<pre>options set SOURCE example.com
+run
+show hosts
+
+# v5-ean ez dago «db export csv» — reporting modulua erabili:
+modules load reporting/csv
+options set FILENAME .../esportazioak/hosts.csv
+options set TABLE hosts
+options set HEADERS True
+run</pre>
+    <div class="note">
+      <strong>Oharra (v5 vs diapositibak):</strong> HE-2 diapositibek
+      <code>db export csv hosts.csv</code> aipatzen dute (v4 / oroitzapen zaharra).
+      recon-ng <strong>v5.1.2</strong>-n <code>db</code> komandoak
+      <code>delete|insert|notes|query|schema</code> onartzen ditu soilik.
+      Esportazioa <code>reporting/csv</code> (edo <code>reporting/json</code>)
+      marketplace moduluekin egiten da.
+    </div>
+    <figure>
+      <img src="pantailak/04-run-eta-esportazioa.png" alt="CSV esportazioa reporting/csv bidez" />
+      <figcaption>
+        4. irudia — Dashboard: 12 host. <code>reporting/csv</code> →
+        <code>hosts.csv</code> (12 erregistro).
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="pantailak/05-csv-emaitzak.png" alt="hosts.csv edukia" />
+      <figcaption>
+        5. irudia — Esportatutako CSV-aren aurrebista terminalan.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>5. Lortutako informazioa</h2>
+    <p>
+      Iturri publikoetatik bildutako host / azpidomeinu adierazgarrienak
+      (<code>hosts-garbitua.csv</code>; CT zarata kendu ondoren):
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Host</th>
+          <th>IP</th>
+          <th>Modulua</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>example.com</td>
+          <td>172.66.147.243</td>
+          <td>hackertarget</td>
+        </tr>
+        <tr>
+          <td>www.example.com</td>
+          <td>104.20.23.154</td>
+          <td>hackertarget</td>
+        </tr>
+        <tr>
+          <td>*.example.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+        <tr>
+          <td>dev.example.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+        <tr>
+          <td>m.example.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+        <tr>
+          <td>products.example.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+        <tr>
+          <td>support.example.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+        <tr>
+          <td>m.testexample.com</td>
+          <td>—</td>
+          <td>certificate_transparency</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      CT moduluak zarata ere ekarri zuen (adib. <code>AS207960</code>,
+      <code>Intermediate</code>, <code>Test</code>) — logetan agertzen diren
+      kate fragmentuak; analisi-fasean iragazi behar dira. Fitxategi osoak:
+      <code>esportazioak/hosts.csv</code> eta <code>hosts.json</code>.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Entregagaiak</h2>
+    <table>
+      <thead>
+        <tr><th>Elementua</th><th>Kokapena</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Txosten hau</td>
+          <td><code>he-ezagutzea/recon-ng-testa/txostena.html</code></td>
+        </tr>
+        <tr>
+          <td>Pantaila-argazkiak (5)</td>
+          <td><code>pantailak/01…05-*.png</code></td>
+        </tr>
+        <tr>
+          <td>CSV esportazioa</td>
+          <td><code>esportazioak/hosts.csv</code> (+ <code>hosts-garbitua.csv</code>)</td>
+        </tr>
+        <tr>
+          <td>JSON esportazioa</td>
+          <td><code>esportazioak/hosts.json</code></td>
+        </tr>
+        <tr>
+          <td>Saioaren RC + transkripzioa</td>
+          <td><code>logs/saioa-ossoa.rc</code>, <code>logs/saioa-ossoa-transkripzioa.txt</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>7. Ondorioak</h2>
+    <ul>
+      <li>Ubuntu 24.04-n recon-ng iturburutik instalatu daiteke (wiki ofiziala).</li>
+      <li>Fluxua argia da: <strong>workspace → marketplace/modulua → options → run → reporting</strong>.</li>
+      <li>API key gabe ere HackerTarget + Certificate Transparency-rekin hostak lortu dira.</li>
+      <li>v5-ean esportazioa <code>reporting/csv</code> moduluan dago, ez <code>db export</code>-en.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Garapen Inguruneak / Hacking etikoa — praktika pasiboa.
+    Ez da eraso aktiborik egin; paketeak helburura ez dira bidali (OSINT).
+  </footer>
+</main>
+</body>
+</html>

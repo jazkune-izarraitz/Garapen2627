@@ -1,0 +1,20 @@
+# recon-ng lab — komandoak (v5.1.2)
+
+```text
+workspaces create nire_helburua
+marketplace install recon/domains-hosts/hackertarget
+marketplace install recon/domains-hosts/certificate_transparency
+marketplace install reporting/csv
+modules load recon/domains-hosts/hackertarget
+options set SOURCE example.com
+run
+show hosts
+back
+modules load reporting/csv
+options set FILENAME /path/to/hosts.csv
+options set TABLE hosts
+options set HEADERS True
+run
+```
+
+Oharra: v5-ean ez dago `db export csv`. Erabili `reporting/csv`.

@@ -1,0 +1,31 @@
+workspaces create nire_helburua
+workspaces list
+marketplace install recon/domains-hosts/hackertarget
+marketplace install recon/domains-hosts/certificate_transparency
+marketplace install reporting/csv
+marketplace install reporting/json
+modules search
+modules load recon/domains-hosts/hackertarget
+info
+options set SOURCE example.com
+run
+back
+modules load recon/domains-hosts/certificate_transparency
+info
+options set SOURCE example.com
+run
+back
+show hosts
+dashboard
+modules load reporting/csv
+info
+options set FILENAME /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.csv
+options set TABLE hosts
+run
+back
+modules load reporting/json
+options set FILENAME /workspace/he-ezagutzea/recon-ng-testa/esportazioak/hosts.json
+options set TABLE hosts
+run
+back
+exit

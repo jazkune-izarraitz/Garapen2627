@@ -1,0 +1,151 @@
+{
+    "hosts": [
+        {
+            "host": "*.example.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "-",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "AS207960",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "Intermediate",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "Test",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "dev.example.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "example.com",
+            "ip_address": "172.66.147.243",
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "hackertarget"
+        },
+        {
+            "host": "m.example.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "m.testexample.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "products.example.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "support.example.com",
+            "ip_address": null,
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "host": "www.example.com",
+            "ip_address": "104.20.23.154",
+            "region": null,
+            "country": null,
+            "latitude": null,
+            "longitude": null,
+            "notes": null,
+            "module": "hackertarget"
+        }
+    ],
+    "contacts": [
+        {
+            "first_name": null,
+            "middle_name": null,
+            "last_name": null,
+            "email": "user@example.com",
+            "title": null,
+            "region": null,
+            "country": null,
+            "phone": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        },
+        {
+            "first_name": null,
+            "middle_name": null,
+            "last_name": null,
+            "email": "subjectname@example.com",
+            "title": null,
+            "region": null,
+            "country": null,
+            "phone": null,
+            "notes": null,
+            "module": "certificate_transparency"
+        }
+    ],
+    "credentials": []
+}
