@@ -2,12 +2,15 @@
 
 Helburua: `http://ziberit.org` webgunetik fitxategiak lortu eta metadatuak aztertzea (JPG geolokalizazioa, PDF Author).
 
-> **Non exekutatu:** script hauek **FPCloud → Arp Kali** mahaigainean korritu behar dira (`eth1` → `10.10.10.0/24`). Cursor/cloud makina honek ez du sarbiderik lab sare horretara.
+> **Irakaslea:** helburuko Ubuntu VM-a prestatzeko ikus `ziberit-zerbitzaria/` (IP `10.10.10.12` + nginx + edukia).
+>
+> **Ikasleak:** script hauek **FPCloud Kali**-n korritu (`10.10.10.0/24`). Cursor/cloud makina honek ez du sarbiderik lab sare horretara.
 
 ## FPCloud-en hasierako pausoak
 
-1. Sartu [fpcloud.izarraitz.eus](https://fpcloud.izarraitz.eus) → **Arp Kali** mahaigaina ireki.
-2. Egiaztatu bi interfaz: `ip a` → `eth1` `10.10.10.x` tartean.
+1. Sartu [fpcloud.izarraitz.eus](https://fpcloud.izarraitz.eus) → Kali mahaigaina ireki (Arp Kali edo zuk sortutakoa).
+2. Egiaztatu lab sarea: `ip -br a` → edozein interfazetan (`eth1`, `eth2`, …) `10.10.10.x/24` IP bat.
+   - Adibide OK: `eth2` → `10.10.10.140/24` (interfazaren izenak ez du axola; tartea bai).
 3. Kopiatu karpeta hau Kalian (git clone / USB / partekatutako karpeta).
 4. Exekutatu prestaketa:
 

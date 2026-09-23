@@ -58,8 +58,8 @@ else
     echo "[OK] hosts bidez iristen da."
   else
     echo "[ERROREA] Oraindik ez. Egiaztatu:"
-    echo "  - Arp Kali mahaigaina (ez beste VM)"
-    echo "  - eth1 10.10.10.0/24 sarean dagoela: ip a"
+    echo "  - Kali + ITE sarea konektatuta (eth1/eth2/… → 10.10.10.x)"
+    echo "  - ip -br a  (adib. eth2 10.10.10.140/24 OK da)"
     echo "  - Helburua piztuta: ping ${HOST_IP}"
     exit 1
   fi

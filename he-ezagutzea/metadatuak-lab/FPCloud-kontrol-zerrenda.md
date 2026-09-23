@@ -5,7 +5,7 @@ Erabili hau mahaigaina prestatzen duzun bitartean.
 ## Sarrera
 
 - [ ] https://fpcloud.izarraitz.eus ireki
-- [ ] **Arp Kali** mahaigaina abiarazi (ez beste VM)
+- [ ] Kali mahaigaina abiarazi (Arp Kali edo ITErekin sortutakoa)
 - [ ] Terminala ireki
 
 ## Sarea
@@ -14,7 +14,8 @@ Erabili hau mahaigaina prestatzen duzun bitartean.
 ip -br a
 ```
 
-- [ ] `eth1` agertzen da `10.10.10.x` IP-rekin
+- [ ] Edozein interfazetan (`eth1` / `eth2` / …) `10.10.10.x/24` IP bat dago
+  - Adibide: `eth2  UP  10.10.10.140/24` → **ondo** (jarduerako “eth1” aipamena orientagarria da)
 
 ## DNS
 
