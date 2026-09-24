@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konektoreekin hasiera — demodb</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #e8eef2;
+      --bg-deep: #0f2a32;
+      --panel: #f7fafb;
+      --ink: #142428;
+      --muted: #4a6068;
+      --teal: #0d6e6e;
+      --teal-soft: #d4ecec;
+      --amber: #c47a14;
+      --amber-soft: #f4e6d0;
+      --line: #c5d4da;
+      --danger: #a33b2c;
+      --ok: #1f6b45;
+      --shadow: 0 18px 40px rgba(15, 42, 50, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-deep);
+      color: var(--ink);
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    .deck {
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      background:
+        radial-gradient(1200px 600px at 90% -10%, rgba(13, 110, 110, 0.18), transparent 55%),
+        radial-gradient(900px 500px at -10% 110%, rgba(196, 122, 20, 0.12), transparent 50%),
+        linear-gradient(160deg, #eef4f6 0%, #e2ebef 55%, #d9e5ea 100%);
+      animation: fadeIn 280ms ease;
+    }
+
+    .slide.active { display: grid; align-content: start; gap: 1.25rem; }
+
+    .slide.hero {
+      align-content: end;
+      background:
+        linear-gradient(115deg, rgba(15, 42, 50, 0.92) 0%, rgba(15, 42, 50, 0.55) 48%, rgba(13, 110, 110, 0.35) 100%),
+        radial-gradient(circle at 70% 40%, #1a5a5a, #0f2a32 60%);
+      color: #f4f8f9;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .kicker {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .hero .kicker { color: #9fd7d4; }
+
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      max-width: 16ch;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      line-height: 1.15;
+      color: var(--bg-deep);
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      color: var(--muted);
+      max-width: 48rem;
+      line-height: 1.45;
+    }
+
+    .hero .lead { color: #d5e4e7; max-width: 36rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.15rem 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.45rem;
+      color: var(--teal);
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 1rem;
+    }
+
+    .card ul { padding-left: 1.1rem; }
+    .card li + li { margin-top: 0.35rem; }
+
+    .why {
+      border-left: 4px solid var(--amber);
+      background: var(--amber-soft);
+      padding: 0.9rem 1rem;
+      border-radius: 0 14px 14px 0;
+      color: #5a3a10;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .why span {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      opacity: 0.8;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0.65rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .flow .box {
+      background: var(--panel);
+      border: 2px solid var(--teal);
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+      min-height: 7.5rem;
+      display: grid;
+      align-content: center;
+      gap: 0.35rem;
+      box-shadow: var(--shadow);
+    }
+
+    .flow .box.mid {
+      border-color: var(--amber);
+      background: #fffaf1;
+    }
+
+    .flow .box strong {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--bg-deep);
+    }
+
+    .flow .box small {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .arrow {
+      font-size: 1.6rem;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .code {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      background: #10262c;
+      color: #d7ece9;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+      line-height: 1.45;
+      overflow: auto;
+      box-shadow: var(--shadow);
+      white-space: pre;
+    }
+
+    .code .c { color: #8fb8b4; }
+    .code .k { color: #f0c27a; }
+    .code .s { color: #9ad0a8; }
+
+    .diagram {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #fff;
+      object-fit: contain;
+      max-height: min(52vh, 460px);
+    }
+
+    .steps {
+      display: grid;
+      gap: 0.75rem;
+      counter-reset: pauso;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.9rem;
+      align-items: start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+    }
+
+    .step::before {
+      counter-increment: pauso;
+      content: counter(pauso);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: var(--teal);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step strong { display: block; color: var(--bg-deep); margin-bottom: 0.15rem; }
+    .step span { color: var(--muted); font-size: 0.95rem; }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .bad { border-top: 4px solid var(--danger); }
+    .good { border-top: 4px solid var(--ok); }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      background: var(--teal-soft);
+      color: var(--teal);
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 1.2rem;
+      background: rgba(15, 42, 50, 0.88);
+      color: #e8f2f3;
+      backdrop-filter: blur(8px);
+      z-index: 20;
+      font-size: 0.9rem;
+    }
+
+    .nav button {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: transparent;
+      color: inherit;
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+    }
+
+    .nav button:hover { background: rgba(255,255,255,0.1); }
+
+    .progress {
+      height: 3px;
+      background: rgba(255,255,255,0.15);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+    }
+
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0d6e6e, #c47a14);
+      transition: width 200ms ease;
+    }
+
+    .hint {
+      position: fixed;
+      top: 0.8rem;
+      right: 1rem;
+      z-index: 25;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      background: rgba(15,42,50,0.45);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .slide { padding-bottom: 4.5rem; }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .compare, .flow {
+        grid-template-columns: 1fr;
+      }
+      .flow .arrow { transform: rotate(90deg); justify-self: center; }
+      h1 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="hint">← → teklak · F pantaila osoa</div>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide hero active">
+      <p class="kicker">Garapen Inguruneak · JDBC</p>
+      <h1>Konektoreekin hasiera</h1>
+      <p class="lead">Gaur: zergatik behar dugun konektorea, nola konektatzen garen MySQL-ra, eta nola irakurri/idatzi <em>demodb</em> datu-basean Java-tik.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <p class="kicker">Helburua</p>
+      <h2>Zer ikasiko dugu gaur?</h2>
+      <div class="grid-3" style="margin-top:0.5rem">
+        <article class="card">
+          <h3>1. Ideia</h3>
+          <p>Zer den JDBC konektorea eta zergatik dagoen aplikazioaren eta datu-basearen artean.</p>
+        </article>
+        <article class="card">
+          <h3>2. Prestaketa</h3>
+          <p>MySQL (Docker), <code>demodb.sql</code> eta JAR-a proiektuan jartzea — bakoitzaren zergatia.</p>
+        </article>
+        <article class="card">
+          <h3>3. Praktika</h3>
+          <p>SELECT → UPDATE (Statement) → PreparedStatement → transakzioak.</p>
+        </article>
+      </div>
+      <p class="why" style="margin-top:1rem"><span>Zergatik orden honetan?</span>Lehenik ulertu komunikazioa; gero irakurri; gero idatzi; azkenik idazketa seguruagoa eta kontrolatua.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <p class="kicker">Arazoa</p>
+      <h2>Java-k ez du MySQL “hizkuntzarik”</h2>
+      <div class="grid-2" style="margin-top:0.4rem">
+        <div>
+          <p class="lead">Zure programak objektuak eta metodoak erabiltzen ditu. MySQL-k SQL eta bere protokoloa ulertzen du. Bi mundu horiek ez dira berdinak.</p>
+          <div class="card" style="margin-top:1rem">
+            <h3>Galdera klabea</h3>
+            <p>Nola esango dio Java aplikazio batek datu-baseari: <em>“Ekarri DEPT taulako sailak”</em>?</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Bi aldeak</h3>
+          <ul>
+            <li><strong>Java:</strong> klaseak, metodoak, String, int…</li>
+            <li><strong>MySQL:</strong> taulak, SQL, portuak, erabiltzaileak…</li>
+            <li><strong>Tartean falta dena:</strong> itzultzaile/zubi bat.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <p class="kicker">Definizioa</p>
+      <h2>Zer da konektorea?</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead">Konektorea (driver) zure aplikazioaren eta DBKSaren arteko <strong>zubia</strong> da. JDBC API-ko komandoak hartu eta datu-basearen protokolo natibora bihurtzen ditu.</p>
+          <p class="why" style="margin-top:1rem"><span>Zertarako erabiliko dugu?</span>Java-tik <code>demodb</code> irakurri eta aldatzeko: sailak zerrendatu, izenak eguneratu, erroreetan atzera egin.</p>
+          <div class="pill-row">
+            <span class="pill">JDBC = Java API estandarra</span>
+            <span class="pill">Driver = MySQL-rako inplementazioa (JAR)</span>
+          </div>
+        </div>
+        <img class="diagram" src="konektorea-diagrama.png" alt="Java → JDBC konektorea → MySQL diagrama" />
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <p class="kicker">Arkitektura</p>
+      <h2>Hiru geruza, rol bakoitza</h2>
+      <div class="flow">
+        <div class="box">
+          <strong>Java aplikazioa</strong>
+          <small>Zure kodea: Statement, ResultSet…</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="box mid">
+          <strong>Konektorea</strong>
+          <small>mysql-connector.jar<br/>Itzulpena + sarea</small>
+        </div>
+        <div class="arrow">→</div>
+        <div class="box">
+          <strong>MySQL</strong>
+          <small>demodb · DEPT / EMP</small>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top:1rem">
+        <article class="card"><h3>Zergatik JAR?</h3><p>MySQL-ren “hizkuntza” ez dator Javarekin. JAR-ak gehitu behar dugu classpath-ean.</p></article>
+        <article class="card"><h3>Zergatik JDBC URL?</h3><p>Non dago zerbitzaria, zein portu, zein datu-base: <code>jdbc:mysql://localhost:3306/demodb</code></p></article>
+        <article class="card"><h3>Zergatik Docker?</h3><p>MySQL instalazio berdina denentzat, azkar eta garbia. Portua mapeatzen dugu kanpotik sartzeko.</p></article>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <p class="kicker">Prestaketa · 0</p>
+      <h2>Ariketa baino lehen: 3 pieza</h2>
+      <div class="steps" style="margin-top:0.4rem">
+        <div class="step">
+          <div>
+            <strong>MySQL martxan (Docker)</strong>
+            <span>Datuak nonbait egon behar dute. Kontainerra = DBKS berdin-berdina ikasle guztientzat.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <strong>demodb.sql inportatu</strong>
+            <span>Taularik gabe ez dago zer kontsultatu. Script-ak DEPT eta EMP sortzen ditu datuekin.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <strong>mysql-connector JAR proiektuan</strong>
+            <span>Java-k MySQL-rekin hitz egiteko driver-a behar du. Gabe: SQLException (“no suitable driver”).</span>
+          </div>
+        </div>
+      </div>
+      <p class="why" style="margin-top:1rem"><span>Gogoratu</span>Host <code>127.0.0.1</code> · Portua <code>3306</code> (edo zure hostPort) · Erabiltzailea <code>root</code> · Datu-basea <code>demodb</code></p>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <p class="kicker">1. urratsa</p>
+      <h2>Konexioa: atea ireki</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead"><code>DriverManager.getConnection(...)</code> deitzen duzunean, JDBC-k driver egokia bilatzen du URL-aren arabera eta <strong>Connection</strong> objektua itzultzen du.</p>
+          <p class="why" style="margin-top:1rem"><span>Zergatik lehenengo hau?</span>Konexiorik gabe ezin da SQL bidali. Ariketa guztiak Connection horretatik abiatzen dira.</p>
+          <div class="card" style="margin-top:1rem">
+            <h3>Ondo egiteko</h3>
+            <ul>
+              <li>try-with-resources → konexioa beti itxi</li>
+              <li>URL + erabiltzaile + pasahitz zuzenak</li>
+              <li>Errorea? JAR, portua edo demodb falta</li>
+            </ul>
+          </div>
+        </div>
+        <pre class="code"><span class="c">// JDBC URL: protokoloa + host + portua + DB</span>
+<span class="k">String</span> url = <span class="s">"jdbc:mysql://localhost:3306/demodb"</span>;
+<span class="k">String</span> user = <span class="s">"root"</span>;
+<span class="k">String</span> pass = <span class="s">"2paag3"</span>;
+
+<span class="k">try</span> (Connection con =
+       DriverManager.getConnection(url, user, pass)) {
+  System.out.println(<span class="s">"Konektatuta!"</span>);
+}</pre>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <p class="kicker">Tresnak</p>
+      <h2>Statement motak (gaur behar ditugunak)</h2>
+      <div class="compare" style="margin-top:0.5rem">
+        <article class="card">
+          <h3>Statement</h3>
+          <p>SQL kate osoa bidaltzen duzu. Sinplea. Ariketan 1 eta 2rako.</p>
+          <ul>
+            <li><code>executeQuery</code> → SELECT</li>
+            <li><code>executeUpdate</code> → INSERT/UPDATE/DELETE</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>PreparedStatement</h3>
+          <p>SQL txantiloi bat <code>?</code> parametroekin. Ariketa 3 (eta 4).</p>
+          <ul>
+            <li>Seguruagoa (injection)</li>
+            <li>Garbiagoa parametroekin</li>
+            <li>Berrerabilgarria</li>
+          </ul>
+        </article>
+      </div>
+      <p class="why" style="margin-top:1rem"><span>Zergatik biak ikasi?</span>Lehenik Statement-ekin mekanika ulertu; gero PreparedStatement-ekin ohitura ona finkatu. Produkzioan PreparedStatement nahiago.</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <p class="kicker">Ariketa 1</p>
+      <h2>Sailak irakurri (SELECT)</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead">Helburua: sail bakoitzaren zenbakia eta izena pantailaratu.</p>
+          <div class="steps" style="margin-top:0.8rem">
+            <div class="step"><div><strong>Statement sortu</strong><span>Konexiotik: <code>con.createStatement()</code></span></div></div>
+            <div class="step"><div><strong>executeQuery</strong><span>SELECT bat da → emaitza taula bat da (ResultSet).</span></div></div>
+            <div class="step"><div><strong>while (rs.next())</strong><span>Kurtsorea errenkadaz errenkada mugitzen da.</span></div></div>
+          </div>
+          <p class="why" style="margin-top:1rem"><span>Zergatik SELECT lehenik?</span>Idatzi aurretik irakurri: datuak daudela ikusi, URL/JAR/taulak ondo daudela frogatu.</p>
+        </div>
+        <pre class="code">Statement st = con.createStatement();
+ResultSet rs = st.executeQuery(
+  <span class="s">"SELECT DEPTNO, DNAME FROM DEPT"</span>
+);
+<span class="k">while</span> (rs.next()) {
+  <span class="k">int</span> no = rs.getInt(<span class="s">"DEPTNO"</span>);
+  <span class="k">String</span> iz = rs.getString(<span class="s">"DNAME"</span>);
+  System.out.println(no + <span class="s">" - "</span> + iz);
+}</pre>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <p class="kicker">Ariketa 2</p>
+      <h2>Sailaren izena aldatu (Statement)</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead">main-eko bi parametro: <strong>sail-zenbakia</strong> eta <strong>izen berria</strong>. Oraingoz Statement soilik (ez PreparedStatement).</p>
+          <div class="card" style="margin-top:0.8rem">
+            <h3>Exekuzio adibidea</h3>
+            <p><code>java AldatuSaila 30 Logistika</code></p>
+            <p style="margin-top:0.4rem"><code>args[0]</code> = 30 · <code>args[1]</code> = Logistika</p>
+          </div>
+          <p class="why" style="margin-top:1rem"><span>Zergatik executeUpdate?</span>UPDATE batean ez dugu taularik itzultzen; eraginiko errenkada-kopurua itzultzen du. Hori inprimatu behar da.</p>
+        </div>
+        <div>
+          <pre class="code"><span class="k">int</span> deptno = Integer.parseInt(args[0]);
+<span class="k">String</span> izena = args[1];
+
+<span class="k">String</span> sql =
+  <span class="s">"UPDATE DEPT SET DNAME='"</span> + izena +
+  <span class="s">"' WHERE DEPTNO="</span> + deptno;
+
+<span class="k">int</span> n = st.executeUpdate(sql);
+System.out.println(<span class="s">"Aldatuta: "</span> + n);</pre>
+          <article class="card bad" style="margin-top:0.8rem">
+            <h3>Kontuz (horregatik doa 3. ariketa)</h3>
+            <p>SQL kateatzeak arriskutsua da (SQL injection) eta zikina. Hurrengo pausoak hori zuzentzen du.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <p class="kicker">Ariketa 3</p>
+      <h2>Gauza bera, PreparedStatement-ekin</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead">SQL finkoa idazten duzu; balioak gero <code>setXxx</code> bidez sartzen dira. Konektoreak balioak segurtasunez bidaltzen ditu.</p>
+          <div class="compare" style="margin-top:0.8rem">
+            <article class="card bad"><h3>Lehen</h3><p>SQL + aldagaiak kateatu</p></article>
+            <article class="card good"><h3>Orain</h3><p><code>?</code> + setString / setInt</p></article>
+          </div>
+          <p class="why" style="margin-top:1rem"><span>Zergatik hau ikasi?</span>Parametroak bereizteak kodea argitzen du eta injekzioa saihesten du. Ohitura ona da lehen egunetik.</p>
+        </div>
+        <pre class="code"><span class="k">String</span> sql =
+  <span class="s">"UPDATE DEPT SET DNAME=? WHERE DEPTNO=?"</span>;
+
+PreparedStatement ps =
+  con.prepareStatement(sql);
+ps.setString(1, izena);   <span class="c">// 1. ?</span>
+ps.setInt(2, deptno);     <span class="c">// 2. ?</span>
+
+<span class="k">int</span> n = ps.executeUpdate();
+System.out.println(<span class="s">"Aldatuta: "</span> + n);</pre>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <p class="kicker">Ariketa 4</p>
+      <h2>Transakzioak: guztia edo ezer ez</h2>
+      <div class="grid-2">
+        <div>
+          <p class="lead">Defektuz <strong>autocommit</strong> piztuta dago: sententzia bakoitza berehala gordetzen da. Multzokatu nahi badugu, itzali.</p>
+          <div class="steps" style="margin-top:0.8rem">
+            <div class="step"><div><strong>setAutoCommit(false)</strong><span>Hemendik aurrerakoak pakete batean.</span></div></div>
+            <div class="step"><div><strong>commit()</strong><span>Dena ondo → aldaketak behin betiko.</span></div></div>
+            <div class="step"><div><strong>rollback()</strong><span>SQLException → ezer ez da gordetzen.</span></div></div>
+          </div>
+          <p class="why" style="margin-top:1rem"><span>Zergatik behar dugu?</span>Eguneraketa bat baino gehiago elkarren menpekoak direnean (adib. eskaera + lerroak): erdi-eginda uztea okerragoa da ezer ez egitea baino.</p>
+        </div>
+        <pre class="code">con.setAutoCommit(<span class="k">false</span>);
+<span class="k">try</span> {
+  ps.executeUpdate();
+  <span class="c">// beste sententziak...</span>
+  con.commit();
+} <span class="k">catch</span> (SQLException e) {
+  con.rollback();
+  <span class="k">throw</span> e;
+} <span class="k">finally</span> {
+  con.setAutoCommit(<span class="k">true</span>);
+}</pre>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <p class="kicker">Eskema</p>
+      <h2>demodb: bi taula, erlazio bat</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>DEPT (sailak)</h3>
+          <ul>
+            <li><code>DEPTNO</code> PK</li>
+            <li><code>DNAME</code> izena</li>
+            <li><code>LOC</code> kokapena</li>
+          </ul>
+          <p style="margin-top:0.6rem">Gaurko ariketak hemen zentratzen dira.</p>
+        </article>
+        <article class="card">
+          <h3>EMP (langileak)</h3>
+          <ul>
+            <li><code>EMPNO</code> PK</li>
+            <li><code>ENAME</code>, <code>JOB</code>, <code>SAL</code>…</li>
+            <li><code>DEPTNO</code> FK → DEPT</li>
+          </ul>
+          <p style="margin-top:0.6rem">Saila ezabatu/aldatzean FK kontuan hartu.</p>
+        </article>
+      </div>
+      <p class="why" style="margin-top:1rem"><span>Zergatik eskema hau?</span>Adibide klasikoa eta txikia da: SELECT eta UPDATE erraz frogatzeko, baina erlazio erreal batekin.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide">
+      <p class="kicker">Klasean</p>
+      <h2>Proba-ordena gomendatua</h2>
+      <div class="steps" style="margin-top:0.4rem">
+        <div class="step"><div><strong>Workbench-en konektatu</strong><span>MySQL bizirik dagoela ziurtatu (Docker + portua).</span></div></div>
+        <div class="step"><div><strong>demodb.sql</strong><span>Taulak eta datuak kargatu.</span></div></div>
+        <div class="step"><div><strong>Ariketa 1</strong><span>SELECT → 4 sail agertu behar dira.</span></div></div>
+        <div class="step"><div><strong>Ariketa 2</strong><span>UPDATE Statement → “Aldatuta: 1”. Workbench-en egiaztatu.</span></div></div>
+        <div class="step"><div><strong>Ariketa 3</strong><span>PreparedStatement → emaitza bera, kode garbia.</span></div></div>
+        <div class="step"><div><strong>Ariketa 4</strong><span>Errore bat behartu → rollback → datuak bere horretan.</span></div></div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <p class="kicker">Laburpena</p>
+      <h2>Gogoratzeko 5 ideia</h2>
+      <div class="grid-3" style="margin-top:0.5rem">
+        <article class="card"><h3>Konektorea</h3><p>Java ↔ MySQL zubia. JAR gabe ez dago komunikaziorik.</p></article>
+        <article class="card"><h3>Connection</h3><p>Atea. Hortik sortzen dira Statement / PreparedStatement.</p></article>
+        <article class="card"><h3>Query vs Update</h3><p>SELECT → ResultSet. UPDATE → eraginiko kopurua.</p></article>
+        <article class="card"><h3>PreparedStatement</h3><p>Parametroak <code>?</code>-rekin: seguruagoa eta argiagoa.</p></article>
+        <article class="card"><h3>Transakzioa</h3><p>commit = gorde guztia. rollback = ezer ez.</p></article>
+        <article class="card"><h3>Gaurko fokua</h3><p>Pool-ak eta prozedurak gerorako. Gaur oinarria menderatu.</p></article>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide hero">
+      <p class="kicker">Hurrengoa</p>
+      <h1>Zuek probatzeko</h1>
+      <p class="lead">Ireki proiektua, JAR gehitu, konektatu <code>demodb</code>-ra eta hasi 1. ariketa: sailak pantailaratu. Blokeatzen bazarete: URL, portua, pasahitza edo JAR falta ohi da.</p>
+    </section>
+  </div>
+
+  <div class="nav">
+    <button type="button" id="prev" aria-label="Aurrekoa">← Aurrekoa</button>
+    <span id="counter">1 / 1</span>
+    <button type="button" id="next" aria-label="Hurrengoa">Hurrengoa →</button>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    let i = 0;
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      counter.textContent = (i + 1) + " / " + slides.length;
+      bar.style.width = ((i + 1) / slides.length * 100) + "%";
+    }
+
+    document.getElementById("prev").addEventListener("click", () => show(i - 1));
+    document.getElementById("next").addEventListener("click", () => show(i + 1));
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+        e.preventDefault();
+        show(i + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault();
+        show(i - 1);
+      } else if (e.key === "Home") {
+        show(0);
+      } else if (e.key === "End") {
+        show(slides.length - 1);
+      } else if (e.key.toLowerCase() === "f") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+    });
+
+    show(0);
+  </script>
+</body>
+</html>
