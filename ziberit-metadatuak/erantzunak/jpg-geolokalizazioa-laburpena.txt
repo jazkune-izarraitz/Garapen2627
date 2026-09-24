@@ -1,0 +1,4 @@
+GPS Position bakarra (irudi guztiak):
+35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+
+Irudi kopurua (GPS Position lerroak): 21

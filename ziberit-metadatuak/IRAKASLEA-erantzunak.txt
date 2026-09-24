@@ -1,34 +1,41 @@
 ZiberIT metadatuak – irakaslearen erantzun-gida
 ================================================
 
-Web edukia
-----------
-- /images/   : 3 JPG GPS-ekin (Donostia, Bilbo, Gasteiz)
-- /docs/     : 4 PDF Author-ekin (Ane errepikatuta → 3 bakarra docs-en)
-- /download/ : 1 JPG GPS + 1 PDF Author (Jon Etxebarria)
+Iturria: autoreak.txt + lokalizazioak.txt (exiftool irteera gordinak)
 
-Gobuster-ek (directory-list-custom.txt) aurkitu beharko lituzke:
-  /images, /download, /docs  (hiztegian daude)
+1) PDF Author bakarrak (errepikatu gabe) — 7
+--------------------------------------------
+Brian May
+Hendrickxx Jean-Michel
+LDG
+Lex Luthor
+arsene@lupin.com
+jeff@amazon.com
+rayb@nodomain.com
 
-Ikasleak igo beharrekoak
-------------------------
-1) jpg-geolokalizazioa  → GPS duten JPG guztien metadatuak
-2) pdf-authors          → Author bakarrak (errepikatu gabe):
-     Ane Goikoetxea
-     Jon Etxebarria
-     Laura Sanchez
-     Mikel Arriola
-3) fitxategi-zerrenda   → wget-ek jeitsitako fitxategiak
+Fitxategia: erantzunak/pdf-authors-bakarrak.txt
+Gordinak:   erantzunak/autoreak.txt  (200 Author sarrera)
 
-GPS gutxi gorabehera
---------------------
-- donostia-kursaal.jpg   43.32 N, 1.98 W
-- bilbao-guggenheim.jpg  43.27 N, 2.93 W
-- gasteiz-plaza.jpg      42.85 N, 2.67 W
-- egoitza.jpg            43.26 N, 2.93 W
+2) JPG geolokalizazioa
+----------------------
+Irudi guztiak toki berean (21 GPS Position sarrera):
 
-Ubuntu-n instalatu
-------------------
-1) Kali/Internetetik edo GitHubetik webroot paketea Ubuntu-ra eraman
-2) sudo bash deploy-ubuntu.sh /bidea/webroot
-3) Kali-tik: curl http://ziberit.org/  → "ZiberIT" ikusi
+  35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+  (Tokyo gutxi gorabehera)
+
+Fitxategia: erantzunak/lokalizazioak.txt
+Laburpena:  erantzunak/jpg-geolokalizazioa-laburpena.txt
+
+3) Ikasleak igo beharrekoa
+--------------------------
+- JPG geolokalizazio metadatuak (exiftool irteera)
+- PDF Author bakarrak (errepikatu gabe)
+- wget-ek jeitsitako fitxategien zerrenda
+
+Oharra
+------
+webroot/ sinplea (images/docs/download) proba arinerako da.
+Jarduera errealak autoreak.txt / lokalizazioak.txt korpus handiagoa
+du (fakturak 2009/2014, NASDAQ_AMZN_2022.pdf, etab.).
+Korpus osoa /var/www/html/-en jarri behar da ikasleek emaitza
+berdinak lortzeko.

@@ -1,0 +1,401 @@
+======== 2009_01_05_without_taxes_1439.pdf
+Author                          : LDG
+======== 2009_01_05_with_taxes_1439.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_01_12_without_taxes_1440.pdf
+Author                          : LDG
+======== 2009_01_12_with_taxes_1440.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_01_19_without_taxes_1441.pdf
+Author                          : LDG
+======== 2009_01_19_with_taxes_1441.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_01_26_without_taxes_1442.pdf
+Author                          : LDG
+======== 2009_01_26_with_taxes_1442.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_02_02_without_taxes_1443.pdf
+Author                          : LDG
+======== 2009_02_02_with_taxes_1443.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_02_09_without_taxes_1444.pdf
+Author                          : LDG
+======== 2009_02_09_with_taxes_1444.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_02_16_without_taxes_1445.pdf
+Author                          : LDG
+======== 2009_02_16_with_taxes_1445.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_02_23_without_taxes_1446.pdf
+Author                          : LDG
+======== 2009_02_23_with_taxes_1446.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_03_02_without_taxes_1447.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_02_with_taxes_1447.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_09_without_taxes_1448.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_09_with_taxes_1448.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_16_without_taxes_1449.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_16_with_taxes_1449.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_23_without_taxes_1450.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_23_with_taxes_1450.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_30_without_taxes_1451.pdf
+Author                          : arsene@lupin.com
+======== 2009_03_30_with_taxes_1451.pdf
+Author                          : arsene@lupin.com
+======== 2009_04_06_without_taxes_1452.pdf
+Author                          : LDG
+======== 2009_04_06_with_taxes_1452.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_04_20_without_taxes_1453.pdf
+Author                          : LDG
+======== 2009_04_20_with_taxes_1453.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_04_27_without_taxes_1454.pdf
+Author                          : LDG
+======== 2009_04_27_with_taxes_1454.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_05_04_without_taxes_1455.pdf
+Author                          : LDG
+======== 2009_05_04_with_taxes_1455.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_05_11_without_taxes_1456.pdf
+Author                          : LDG
+======== 2009_05_11_with_taxes_1456.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_05_18_without_taxes_1457.pdf
+Author                          : LDG
+======== 2009_05_18_with_taxes_1457.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_05_25_without_taxes_1458.pdf
+Author                          : LDG
+======== 2009_05_25_with_taxes_1458.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_06_01_without_taxes_1459.pdf
+Author                          : LDG
+======== 2009_06_01_with_taxes_1459.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_06_08_without_taxes_1460.pdf
+Author                          : LDG
+======== 2009_06_08_with_taxes_1460.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_06_15_without_taxes_1461.pdf
+Author                          : LDG
+======== 2009_06_15_with_taxes_1461.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_06_22_without_taxes_1462.pdf
+Author                          : LDG
+======== 2009_06_22_with_taxes_1462.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_06_29_without_taxes_1463.pdf
+Author                          : LDG
+======== 2009_06_29_with_taxes_1463.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_07_06_without_taxes_1464.pdf
+Author                          : LDG
+======== 2009_07_06_with_taxes_1464.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_07_13_without_taxes_1465.pdf
+Author                          : LDG
+======== 2009_07_13_with_taxes_1465.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_07_20_without_taxes_1466.pdf
+Author                          : LDG
+======== 2009_07_20_with_taxes_1466.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_07_27_without_taxes_1467.pdf
+Author                          : LDG
+======== 2009_07_27_with_taxes_1467.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_08_03_without_taxes_1468.pdf
+Author                          : LDG
+======== 2009_08_03_with_taxes_1468.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_08_10_without_taxes_1469.pdf
+Author                          : LDG
+======== 2009_08_10_with_taxes_1469.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_08_17_without_taxes_1470.pdf
+Author                          : LDG
+======== 2009_08_17_with_taxes_1470.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_08_24_without_taxes_1471.pdf
+Author                          : LDG
+======== 2009_08_24_with_taxes_1471.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_08_31_without_taxes_1472.pdf
+Author                          : LDG
+======== 2009_08_31_with_taxes_1472.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_09_07_without_taxes_1473.pdf
+Author                          : LDG
+======== 2009_09_07_with_taxes_1473.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_09_14_without_taxes_1474.pdf
+Author                          : LDG
+======== 2009_09_14_with_taxes_1474.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_09_21_without_taxes_1475.pdf
+Author                          : LDG
+======== 2009_09_21_with_taxes_1475.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_09_28_without_taxes_1476.pdf
+Author                          : LDG
+======== 2009_09_28_with_taxes_1476.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_10_05_without_taxes_1477.pdf
+Author                          : LDG
+======== 2009_10_05_with_taxes_1477.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_10_12_without_taxes_1478.pdf
+Author                          : LDG
+======== 2009_10_12_with_taxes_1478.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_10_19_without_taxes_1479.pdf
+Author                          : LDG
+======== 2009_10_19_with_taxes_1479.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_10_26_without_taxes_1480.pdf
+Author                          : LDG
+======== 2009_10_26_with_taxes_1480.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_11_02_without_taxes_1481.pdf
+Author                          : LDG
+======== 2009_11_02_with_taxes_1481.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_11_09_without_taxes_1482.pdf
+Author                          : LDG
+======== 2009_11_09_with_taxes_1482.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_11_16_without_taxes_1483.pdf
+Author                          : LDG
+======== 2009_11_16_with_taxes_1483.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_11_23_without_taxes_1484.pdf
+Author                          : LDG
+======== 2009_11_23_with_taxes_1484.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_11_30_without_taxes_1485.pdf
+Author                          : LDG
+======== 2009_11_30_with_taxes_1485.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_12_07_without_taxes_1486.pdf
+Author                          : LDG
+======== 2009_12_07_with_taxes_1486.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_12_14_without_taxes_1487.pdf
+Author                          : LDG
+======== 2009_12_14_with_taxes_1487.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2009_12_21_without_taxes_1488.pdf
+Author                          : LDG
+======== 2009_12_21_with_taxes_1488.pdf
+Author                          : Hendrickxx Jean-Michel
+======== 2014_01_06_without_taxes_1685.pdf
+Author                          : Lex Luthor
+======== 2014_01_06_with_taxes_1685.pdf
+Author                          : Lex Luthor
+======== 2014_01_13_without_taxes_1686.pdf
+Author                          : Lex Luthor
+======== 2014_01_13_with_taxes_1686.pdf
+Author                          : Lex Luthor
+======== 2014_01_20_without_taxes_1687.pdf
+Author                          : Lex Luthor
+======== 2014_01_20_with_taxes_1687.pdf
+Author                          : Lex Luthor
+======== 2014_01_27_without_taxes_1688.pdf
+Author                          : Lex Luthor
+======== 2014_01_27_with_taxes_1688.pdf
+Author                          : Lex Luthor
+======== 2014_02_03_without_taxes_1689.pdf
+Author                          : Lex Luthor
+======== 2014_02_03_with_taxes_1689.pdf
+Author                          : Lex Luthor
+======== 2014_02_10_without_taxes_1690.pdf
+Author                          : Lex Luthor
+======== 2014_02_10_with_taxes_1690.pdf
+Author                          : Lex Luthor
+======== 2014_02_17_without_taxes_1691.pdf
+Author                          : Lex Luthor
+======== 2014_02_17_with_taxes_1691.pdf
+Author                          : Lex Luthor
+======== 2014_02_24_without_taxes_1692.pdf
+Author                          : Lex Luthor
+======== 2014_02_24_with_taxes_1692.pdf
+Author                          : Lex Luthor
+======== 2014_03_03_without_taxes_1693.pdf
+Author                          : Lex Luthor
+======== 2014_03_03_with_taxes_1693.pdf
+Author                          : Lex Luthor
+======== 2014_03_10_without_taxes_1694.pdf
+Author                          : Lex Luthor
+======== 2014_03_10_with_taxes_1694.pdf
+Author                          : Lex Luthor
+======== 2014_03_17_without_taxes_1695.pdf
+Author                          : Lex Luthor
+======== 2014_03_17_with_taxes_1695.pdf
+Author                          : Lex Luthor
+======== 2014_03_24_without_taxes_1696.pdf
+Author                          : Lex Luthor
+======== 2014_03_24_with_taxes_1696.pdf
+Author                          : Lex Luthor
+======== 2014_03_31_without_taxes_1697.pdf
+Author                          : Lex Luthor
+======== 2014_03_31_with_taxes_1697.pdf
+Author                          : Lex Luthor
+======== 2014_04_07_without_taxes_1698.pdf
+Author                          : Lex Luthor
+======== 2014_04_07_with_taxes_1698.pdf
+Author                          : Lex Luthor
+======== 2014_04_14_without_taxes_1699.pdf
+Author                          : Lex Luthor
+======== 2014_04_14_with_taxes_1699.pdf
+Author                          : Lex Luthor
+======== 2014_04_28_without_taxes_1700.pdf
+Author                          : Lex Luthor
+======== 2014_04_28_with_taxes_1700.pdf
+Author                          : Lex Luthor
+======== 2014_05_05_without_taxes_1701.pdf
+Author                          : Lex Luthor
+======== 2014_05_05_with_taxes_1701.pdf
+Author                          : Lex Luthor
+======== 2014_05_12_without_taxes_1702.pdf
+Author                          : Lex Luthor
+======== 2014_05_12_with_taxes_1702.pdf
+Author                          : Lex Luthor
+======== 2014_05_19_without_taxes_1703.pdf
+Author                          : Lex Luthor
+======== 2014_05_19_with_taxes_1703.pdf
+Author                          : Lex Luthor
+======== 2014_05_26_without_taxes_1704.pdf
+Author                          : Lex Luthor
+======== 2014_05_26_with_taxes_1704.pdf
+Author                          : Lex Luthor
+======== 2014_06_02_without_taxes_1705.pdf
+Author                          : Lex Luthor
+======== 2014_06_02_with_taxes_1705.pdf
+Author                          : Lex Luthor
+======== 2014_06_09_without_taxes_1706.pdf
+Author                          : Lex Luthor
+======== 2014_06_09_with_taxes_1706.pdf
+Author                          : Lex Luthor
+======== 2014_06_16_without_taxes_1707.pdf
+Author                          : Lex Luthor
+======== 2014_06_16_with_taxes_1707.pdf
+Author                          : Lex Luthor
+======== 2014_06_23_without_taxes_1708.pdf
+Author                          : Lex Luthor
+======== 2014_06_23_with_taxes_1708.pdf
+Author                          : Lex Luthor
+======== 2014_06_30_without_taxes_1709.pdf
+Author                          : Lex Luthor
+======== 2014_06_30_with_taxes_1709.pdf
+Author                          : Lex Luthor
+======== 2014_07_07_without_taxes_1710.pdf
+Author                          : Brian May
+======== 2014_07_07_with_taxes_1710.pdf
+Author                          : Brian May
+======== 2014_07_14_without_taxes_1711.pdf
+Author                          : Brian May
+======== 2014_07_14_with_taxes_1711.pdf
+Author                          : Brian May
+======== 2014_07_21_without_taxes_1712.pdf
+Author                          : Brian May
+======== 2014_07_21_with_taxes_1712.pdf
+Author                          : Brian May
+======== 2014_07_28_without_taxes_1713.pdf
+Author                          : Brian May
+======== 2014_07_28_with_taxes_1713.pdf
+Author                          : Brian May
+======== 2014_08_04_without_taxes_1714.pdf
+Author                          : Lex Luthor
+======== 2014_08_04_with_taxes_1714.pdf
+Author                          : Lex Luthor
+======== 2014_08_11_without_taxes_1715.pdf
+Author                          : Lex Luthor
+======== 2014_08_11_with_taxes_1715.pdf
+Author                          : Lex Luthor
+======== 2014_08_18_without_taxes_1716.pdf
+Author                          : Lex Luthor
+======== 2014_08_18_with_taxes_1716.pdf
+Author                          : Lex Luthor
+======== 2014_08_25_without_taxes_1717.pdf
+Author                          : Lex Luthor
+======== 2014_08_25_with_taxes_1717.pdf
+Author                          : Lex Luthor
+======== 2014_09_01_without_taxes_1718.pdf
+Author                          : Lex Luthor
+======== 2014_09_01_with_taxes_1718.pdf
+Author                          : Lex Luthor
+======== 2014_09_08_without_taxes_1719.pdf
+Author                          : Lex Luthor
+======== 2014_09_08_with_taxes_1719.pdf
+Author                          : Lex Luthor
+======== 2014_09_15_without_taxes_1720.pdf
+Author                          : Lex Luthor
+======== 2014_09_15_with_taxes_1720.pdf
+Author                          : Lex Luthor
+======== 2014_09_22_without_taxes_1721.pdf
+Author                          : Lex Luthor
+======== 2014_09_22_with_taxes_1721.pdf
+Author                          : Lex Luthor
+======== 2014_09_29_without_taxes_1722.pdf
+Author                          : Lex Luthor
+======== 2014_09_29_with_taxes_1722.pdf
+Author                          : Lex Luthor
+======== 2014_10_06_without_taxes_1723.pdf
+Author                          : Lex Luthor
+======== 2014_10_06_with_taxes_1723.pdf
+Author                          : Lex Luthor
+======== 2014_10_13_without_taxes_1724.pdf
+Author                          : Lex Luthor
+======== 2014_10_13_with_taxes_1724.pdf
+Author                          : Lex Luthor
+======== 2014_10_20_without_taxes_1725.pdf
+Author                          : Lex Luthor
+======== 2014_10_20_with_taxes_1725.pdf
+Author                          : Lex Luthor
+======== 2014_10_27_without_taxes_1726.pdf
+Author                          : Lex Luthor
+======== 2014_10_27_with_taxes_1726.pdf
+Author                          : Lex Luthor
+======== 2014_11_03_without_taxes_1727.pdf
+Author                          : Lex Luthor
+======== 2014_11_03_with_taxes_1727.pdf
+Author                          : Lex Luthor
+======== 2014_11_10_without_taxes_1728.pdf
+Author                          : Lex Luthor
+======== 2014_11_10_with_taxes_1728.pdf
+Author                          : Lex Luthor
+======== 2014_11_17_without_taxes_1729.pdf
+Author                          : Lex Luthor
+======== 2014_11_17_with_taxes_1729.pdf
+Author                          : Lex Luthor
+======== 2014_11_24_without_taxes_1730.pdf
+Author                          : Lex Luthor
+======== 2014_11_24_with_taxes_1730.pdf
+Author                          : Lex Luthor
+======== 2014_12_01_without_taxes_1731.pdf
+Author                          : Lex Luthor
+======== 2014_12_01_with_taxes_1731.pdf
+Author                          : Lex Luthor
+======== 2014_12_08_without_taxes_1732.pdf
+Author                          : Lex Luthor
+======== 2014_12_08_with_taxes_1732.pdf
+Author                          : Lex Luthor
+======== 2014_12_15_without_taxes_1733.pdf
+Author                          : Lex Luthor
+======== 2014_12_15_with_taxes_1733.pdf
+Author                          : Lex Luthor
+======== NASDAQ_AMZN_2022.pdf
+Author                          : jeff@amazon.com
+======== samplenohiddendata.pdf
+Author                          : rayb@nodomain.com
+  200 image files read
