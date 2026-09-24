@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ezagutzea — recon-ng eta SpiderFoot</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --fg: #e8eef4;
+      --muted: #9aabbc;
+      --accent: #3d9ee5;
+      --card: #1a2332;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    .deck {
+      height: 100%;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 4rem 5rem;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .slide.active { display: flex; }
+    .slide.title-slide {
+      text-align: left;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      line-height: 1.15;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      margin: 0 0 1.5rem;
+      color: var(--accent);
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.35rem;
+      margin-top: 0.75rem;
+    }
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      line-height: 1.55;
+      max-width: 42rem;
+    }
+    li { margin-bottom: 0.65rem; }
+    li::marker { color: var(--accent); }
+    p {
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      line-height: 1.5;
+      max-width: 40rem;
+      margin: 0 0 0.85rem;
+    }
+    .line { margin: 0.35rem 0; font-size: clamp(1.2rem, 2.4vw, 1.7rem); }
+    .line strong { color: var(--accent); font-weight: 600; }
+    pre, .code {
+      background: var(--card);
+      border: 1px solid #2a3a4d;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      overflow-x: auto;
+      max-width: 48rem;
+      line-height: 1.45;
+    }
+    .note {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 40rem;
+    }
+    .footer {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 5rem;
+      right: 5rem;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .example {
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      max-width: 44rem;
+      font-size: 1.1rem;
+      line-height: 1.45;
+    }
+    kbd {
+      background: #243044;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide title-slide active">
+      <h1>Ezagutzea (Footprinting)</h1>
+      <p class="subtitle">Tresnak: recon-ng eta SpiderFoot</p>
+      <p class="subtitle">Hacking etikoa — Kali Linux</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <h2>Testuingurua</h2>
+      <ul>
+        <li>Ezagutze fasean informazio publikoa biltzen dugu (OSINT).</li>
+        <li>Lan errepikakorrak automatizatu daitezke.</li>
+        <li>Gaur: komando-lerroko / web tresna bi.</li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <h2>Zertarako balio dute?</h2>
+      <ul>
+        <li>Domeinuei, webguneei, korreoei… buruzko datuak biltzeko.</li>
+        <li>Beste zerbitzuen <strong>API</strong>-ak bateratzeko toki bakarrean.</li>
+        <li>Eskuz orduak hartuko luketen bilaketak errazteko.</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <h2>Zer informazio lor dezakegu</h2>
+      <ul>
+        <li>Azpidomeinuak eta hostak</li>
+        <li>IP helbideak</li>
+        <li>Korreo helbideak</li>
+        <li>DNS / WHOIS / web teknologia</li>
+        <li>Sare sozialetako arrastoak</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <h2>API key-ak — garrantzitsua</h2>
+      <ul>
+        <li>Emaitza onak lortzeko, askotan <strong>API key</strong> behar da.</li>
+        <li>Zerbitzu horietan erregistratu behar gara.</li>
+        <li>Doako planak egon daitezke; batzuetan ez.</li>
+        <li>Key gabe: modulu batzuk hutsik edo mugatuta.</li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <h2>API adibideak</h2>
+      <ul>
+        <li><strong>Hunter.io</strong> — korreo bilaketa</li>
+        <li><strong>Shodan</strong> — Interneteko host/portuak</li>
+        <li><strong>HackerTarget</strong> — azpidomeinuak (maiz key gabe / muga)</li>
+        <li><strong>GitHub, Virustotal…</strong> — beste moduluak</li>
+      </ul>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide title-slide">
+      <h1>recon-ng</h1>
+      <p class="subtitle">OSINT framework — komando-lerroa</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <h2>Zer da recon-ng?</h2>
+      <ul>
+        <li>Kali-n instalatuta etortzen den tresna.</li>
+        <li>Moduluetan oinarritutako framework-a.</li>
+        <li>Emaitzak workspace / datu-basean gordetzen ditu.</li>
+      </ul>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <h2>Nabigazio kontekstuala</h2>
+      <p class="line"><strong>Workspaces</strong> → proiektua / helburua</p>
+      <p class="line"><strong>Modules</strong> → bilaketa-tresna bakoitza</p>
+      <p class="note">Mailaka mugitzen gara; maila bakoitzean aukera desberdinak.</p>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <h2>Kali-n abiarazi</h2>
+      <pre>sudo apt update
+sudo apt install recon-ng
+recon-ng</pre>
+      <p class="note">Instalatuta badago, zuzenean: <code>recon-ng</code></p>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <h2>Urratsak (klaseko zeregina)</h2>
+      <ul>
+        <li>1. Workspace bat sortu</li>
+        <li>2. Modulu pare bat kargatu</li>
+        <li>3. Domeinu baten gainean exekutatu</li>
+        <li>4. Emaitzarik ez → beste domeinu / modulu</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <h2>Adibide komandoak</h2>
+      <pre>workspaces create nire_helburua
+marketplace search hackertarget
+marketplace install recon/domains-hosts/hackertarget
+modules load recon/domains-hosts/hackertarget
+options set SOURCE example.com
+run
+show hosts</pre>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <h2>API key recon-ng-n</h2>
+      <pre>keys add hunter_io ZURE_API_KEY
+keys add shodan_api ZURE_API_KEY
+keys list</pre>
+      <p class="note">Moduluak marketplace-n <code>K</code> zutabean key behar duten erakusten dute.</p>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide">
+      <h2>Emaitza adibidea (hosts)</h2>
+      <div class="example">
+        <code>show hosts</code> ostean, adibidez:<br><br>
+        www.example.com → 93.184.216.34<br>
+        mail.example.com → 93.184.216.55<br>
+        blog.example.com → 93.184.216.71<br><br>
+        <em>Domeinu erreala erabili; emaitzak aldatu egiten dira.</em>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <h2>Esportatu</h2>
+      <pre>show hosts
+db export csv hosts.csv</pre>
+      <p class="note">Emaitzak fitxategira atera eta txostenarekin batera igo.</p>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide title-slide">
+      <h1>SpiderFoot</h1>
+      <p class="subtitle">OSINT automatizatua — web interfazea</p>
+    </section>
+
+    <!-- 17 -->
+    <section class="slide">
+      <h2>Zer da SpiderFoot?</h2>
+      <ul>
+        <li>OSINT bilaketa automatikoa (footprint).</li>
+        <li>2022an Intel 471-ek erosi; kode irekiko fork eguneratua.</li>
+        <li>Web UI batekin erabiltzen da.</li>
+      </ul>
+      <p class="note">https://github.com/poppopjmp/spiderfoot</p>
+    </section>
+
+    <!-- 18 -->
+    <section class="slide">
+      <h2>Instalazioa: Docker</h2>
+      <ul>
+        <li>Klasean Docker erabiliko dugu.</li>
+        <li>Dokumentazio ofizialaren urratsak jarraitu.</li>
+        <li>Abiarazi ostean: nabigatzailean web interfazea.</li>
+      </ul>
+    </section>
+
+    <!-- 19 -->
+    <section class="slide">
+      <h2>Docker adibidea</h2>
+      <pre>docker pull poppopjmp/spiderfoot
+docker run -p 5001:5001 poppopjmp/spiderfoot</pre>
+      <p class="note">Gero nabigatzailea: <code>http://127.0.0.1:5001</code><br>
+      (Irudi/izen zehatza dokumentazioan egiaztatu.)</p>
+    </section>
+
+    <!-- 20 -->
+    <section class="slide">
+      <h2>Zeregina SpiderFoot-ekin</h2>
+      <ul>
+        <li>Footprint eskaneo bat domeinuaren gainean</li>
+        <li>hunter.io API key konfiguratu</li>
+        <li>Moduluak ikusi + beste zerbitzu batean erregistratu</li>
+        <li>Eskaneo bat: hunter.io + aukeratutako modulua</li>
+      </ul>
+    </section>
+
+    <!-- 21 -->
+    <section class="slide">
+      <h2>Emaitza adibidea (SpiderFoot)</h2>
+      <div class="example">
+        Helburua: <code>example.com</code><br><br>
+        · Email: info@example.com, support@example.com<br>
+        · Azpidomeinuak: www, mail, cdn…<br>
+        · DNS / IP loturak<br>
+        · Web teknologia (CMS, zerbitzaria…)<br><br>
+        Grafikoan nodoak eta loturak ikus daitezke.
+      </div>
+    </section>
+
+    <!-- 22 -->
+    <section class="slide">
+      <h2>Entregatu beharrekoa</h2>
+      <ul>
+        <li>Dokumentua: probaren urratsak + lortutako informazioa</li>
+        <li>Pantaila-argazkiak unean-unean</li>
+        <li>Esportazioak (CSV / txostenak) erantsi</li>
+      </ul>
+    </section>
+
+    <!-- 23 -->
+    <section class="slide">
+      <h2>Kontuan hartzekoa</h2>
+      <ul>
+        <li>Iturri publikoak eta legezkoak soilik.</li>
+        <li>Helburu propioak edo baimendutako domeinuak.</li>
+        <li>API key-ak sekretuak dira: ez partekatu txostenean.</li>
+      </ul>
+    </section>
+
+    <!-- 24 -->
+    <section class="slide title-slide">
+      <h1>Galderak?</h1>
+      <p class="subtitle">Hurrengoa: praktikak Kali-n (recon-ng) eta Docker-en (SpiderFoot)</p>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    <span>Hacking etikoa — Ezagutzea</span>
+    <span id="counter">1 / 24</span>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let i = 0;
+    const counter = document.getElementById('counter');
+    function show(n) {
+      slides[i].classList.remove('active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('active');
+      counter.textContent = (i + 1) + ' / ' + slides.length;
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault(); show(i + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault(); show(i - 1);
+      } else if (e.key === 'Home') { e.preventDefault(); show(0); }
+      else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    });
+  </script>
+</body>
+</html>
