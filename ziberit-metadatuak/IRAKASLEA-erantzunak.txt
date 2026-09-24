@@ -1,0 +1,34 @@
+ZiberIT metadatuak – irakaslearen erantzun-gida
+================================================
+
+Web edukia
+----------
+- /images/   : 3 JPG GPS-ekin (Donostia, Bilbo, Gasteiz)
+- /docs/     : 4 PDF Author-ekin (Ane errepikatuta → 3 bakarra docs-en)
+- /download/ : 1 JPG GPS + 1 PDF Author (Jon Etxebarria)
+
+Gobuster-ek (directory-list-custom.txt) aurkitu beharko lituzke:
+  /images, /download, /docs  (hiztegian daude)
+
+Ikasleak igo beharrekoak
+------------------------
+1) jpg-geolokalizazioa  → GPS duten JPG guztien metadatuak
+2) pdf-authors          → Author bakarrak (errepikatu gabe):
+     Ane Goikoetxea
+     Jon Etxebarria
+     Laura Sanchez
+     Mikel Arriola
+3) fitxategi-zerrenda   → wget-ek jeitsitako fitxategiak
+
+GPS gutxi gorabehera
+--------------------
+- donostia-kursaal.jpg   43.32 N, 1.98 W
+- bilbao-guggenheim.jpg  43.27 N, 2.93 W
+- gasteiz-plaza.jpg      42.85 N, 2.67 W
+- egoitza.jpg            43.26 N, 2.93 W
+
+Ubuntu-n instalatu
+------------------
+1) Kali/Internetetik edo GitHubetik webroot paketea Ubuntu-ra eraman
+2) sudo bash deploy-ubuntu.sh /bidea/webroot
+3) Kali-tik: curl http://ziberit.org/  → "ZiberIT" ikusi
