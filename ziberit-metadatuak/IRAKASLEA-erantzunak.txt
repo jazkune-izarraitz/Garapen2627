@@ -1,0 +1,41 @@
+ZiberIT metadatuak – irakaslearen erantzun-gida
+================================================
+
+Iturria: autoreak.txt + lokalizazioak.txt (exiftool irteera gordinak)
+
+1) PDF Author bakarrak (errepikatu gabe) — 7
+--------------------------------------------
+Brian May
+Hendrickxx Jean-Michel
+LDG
+Lex Luthor
+arsene@lupin.com
+jeff@amazon.com
+rayb@nodomain.com
+
+Fitxategia: erantzunak/pdf-authors-bakarrak.txt
+Gordinak:   erantzunak/autoreak.txt  (200 Author sarrera)
+
+2) JPG geolokalizazioa
+----------------------
+Irudi guztiak toki berean (21 GPS Position sarrera):
+
+  35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+  (Tokyo gutxi gorabehera)
+
+Fitxategia: erantzunak/lokalizazioak.txt
+Laburpena:  erantzunak/jpg-geolokalizazioa-laburpena.txt
+
+3) Ikasleak igo beharrekoa
+--------------------------
+- JPG geolokalizazio metadatuak (exiftool irteera)
+- PDF Author bakarrak (errepikatu gabe)
+- wget-ek jeitsitako fitxategien zerrenda
+
+Oharra
+------
+webroot/ sinplea (images/docs/download) proba arinerako da.
+Jarduera errealak autoreak.txt / lokalizazioak.txt korpus handiagoa
+du (fakturak 2009/2014, NASDAQ_AMZN_2022.pdf, etab.).
+Korpus osoa /var/www/html/-en jarri behar da ikasleek emaitza
+berdinak lortzeko.

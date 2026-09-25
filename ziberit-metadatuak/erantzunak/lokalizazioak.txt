@@ -1,0 +1,126 @@
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
+GPS Version ID                  : 2.3.0.0
+GPS Latitude Ref                : North
+GPS Longitude Ref               : East
+GPS Latitude                    : 35 deg 41' 6.00" N
+GPS Longitude                   : 139 deg 45' 5.00" E
+GPS Position                    : 35 deg 41' 6.00" N, 139 deg 45' 5.00" E
