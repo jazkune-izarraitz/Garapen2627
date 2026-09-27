@@ -3,7 +3,7 @@
 require 'konexioa.php';
 
 $taulak = $pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN);
-$produktuak = $pdo->query('SELECT * FROM produktuak')->fetchAll();
+$produktuak = $pdo->query('SELECT * FROM produktuak')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="eu">
