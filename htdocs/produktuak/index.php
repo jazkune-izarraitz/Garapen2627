@@ -1,138 +1,53 @@
 <?php
-/**
- * index.php — Produktuen zerrenda
- * Izena + prezioa, gehitu, ezabatu eta editatu.
- */
-require __DIR__ . '/konexioa.php';
+// Produktuen zerrenda: izena + prezioa, gehitu, ezabatu, editatu
+require 'konexioa.php';
 
-$mezua = '';
-$errorea = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['ekintza'] ?? '') === 'gehitu') {
-    $izena = trim($_POST['izena'] ?? '');
-    $deskribapena = trim($_POST['deskribapena'] ?? '');
-    $prezioa = trim($_POST['prezioa'] ?? '');
-    $irudia = trim($_POST['irudia'] ?? '');
-
-    if ($izena === '' || $prezioa === '') {
-        $errorea = 'Izena eta prezioa beharrezkoak dira.';
-    } elseif (!is_numeric($prezioa) || (float) $prezioa < 0) {
-        $errorea = 'Prezioak zenbaki positiboa izan behar du.';
-    } else {
-        $stmt = $pdo->prepare(
-            'INSERT INTO produktuak (izena, deskribapena, prezioa, irudia) VALUES (?, ?, ?, ?)'
-        );
-        $stmt->execute([
-            $izena,
-            $deskribapena !== '' ? $deskribapena : null,
-            number_format((float) $prezioa, 2, '.', ''),
-            $irudia !== '' ? $irudia : 'lehenetsia.png',
-        ]);
-        header('Location: index.php?ok=1');
-        exit;
-    }
+// Produktu berria txertatu
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $stmt = $pdo->prepare('INSERT INTO produktuak (izena, deskribapena, prezioa, irudia) VALUES (?, ?, ?, ?)');
+    $stmt->execute([
+        $_POST['izena'],
+        $_POST['deskribapena'],
+        $_POST['prezioa'],
+        $_POST['irudia'] ?: 'lehenetsia.png',
+    ]);
+    header('Location: index.php');
+    exit;
 }
 
-if (isset($_GET['ok'])) {
-    $mezua = 'Produktua ondo gorde da.';
-}
-if (isset($_GET['ezabatuta'])) {
-    $mezua = 'Produktua ezabatu da.';
-}
-if (isset($_GET['eguneratuta'])) {
-    $mezua = 'Produktua eguneratu da.';
-}
-
-$produktuak = $pdo->query(
-    'SELECT id, izena, prezioa FROM produktuak ORDER BY id'
-)->fetchAll();
+$produktuak = $pdo->query('SELECT id, izena, prezioa FROM produktuak ORDER BY id')->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="eu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Denda — Produktuak</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,550;9..144,650&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Produktuak</title>
 </head>
 <body>
-<div class="wrap">
-  <header class="brand">
-    <strong>Denda</strong>
-    <span>Produktuen katalogoa</span>
-  </header>
+  <h1>Produktuen zerrenda</h1>
 
-  <section class="panel">
-    <h1>Produktuen zerrenda</h1>
-    <p class="lead">Izena eta prezioa. Hautatu bat xehetasunak ikusteko, edo kudeatu katalogoa.</p>
+  <table border="1" cellpadding="6">
+    <tr><th>Izena</th><th>Prezioa</th><th>Ekintzak</th></tr>
+    <?php foreach ($produktuak as $p): ?>
+      <tr>
+        <td><?= htmlspecialchars($p['izena']) ?></td>
+        <td><?= number_format($p['prezioa'], 2) ?> €</td>
+        <td>
+          <a href="xehetasunak.php?id=<?= $p['id'] ?>">Ikusi</a> |
+          <a href="editatu.php?id=<?= $p['id'] ?>">Editatu</a> |
+          <a href="ezabatu.php?id=<?= $p['id'] ?>">Ezabatu</a>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
 
-    <?php if ($mezua): ?><div class="flash"><?= htmlspecialchars($mezua) ?></div><?php endif; ?>
-    <?php if ($errorea): ?><div class="flash err"><?= htmlspecialchars($errorea) ?></div><?php endif; ?>
-
-    <?php if (!$produktuak): ?>
-      <p class="empty">Ez dago produkturik oraindik. Gehitu lehenengoa behean.</p>
-    <?php else: ?>
-      <table>
-        <thead>
-          <tr>
-            <th>Izena</th>
-            <th class="prezioa">Prezioa</th>
-            <th>Ekintzak</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($produktuak as $p): ?>
-          <tr>
-            <td>
-              <a href="xehetasunak.php?id=<?= (int) $p['id'] ?>">
-                <?= htmlspecialchars($p['izena']) ?>
-              </a>
-            </td>
-            <td class="prezioa"><?= number_format((float) $p['prezioa'], 2, ',', '.') ?> €</td>
-            <td>
-              <div class="actions">
-                <a class="btn linkish" href="xehetasunak.php?id=<?= (int) $p['id'] ?>">Ikusi</a>
-                <a class="btn linkish" href="editatu.php?id=<?= (int) $p['id'] ?>">Editatu</a>
-                <a class="btn linkish" href="ezabatu.php?id=<?= (int) $p['id'] ?>"
-                   onclick="return confirm('Ziur produktua ezabatu nahi duzula?');">Ezabatu</a>
-              </div>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-        </tbody>
-      </table>
-    <?php endif; ?>
-  </section>
-
-  <section class="panel">
-    <h2>Produktu berria</h2>
-    <p class="lead">Txertatu produktu bat datu-basean.</p>
-    <form method="post" action="" class="form-grid">
-      <input type="hidden" name="ekintza" value="gehitu">
-
-      <label for="izena">Izena</label>
-      <input id="izena" name="izena" required maxlength="100"
-             value="<?= htmlspecialchars($_POST['izena'] ?? '') ?>">
-
-      <label for="deskribapena">Deskribapena</label>
-      <textarea id="deskribapena" name="deskribapena" maxlength="2000"><?= htmlspecialchars($_POST['deskribapena'] ?? '') ?></textarea>
-
-      <label for="prezioa">Prezioa (€)</label>
-      <input id="prezioa" name="prezioa" type="number" step="0.01" min="0" required
-             value="<?= htmlspecialchars($_POST['prezioa'] ?? '') ?>">
-
-      <label for="irudia">Irudi fitxategia (irudiak/ karpetan)</label>
-      <input id="irudia" name="irudia" maxlength="255" placeholder="adib. te.png"
-             value="<?= htmlspecialchars($_POST['irudia'] ?? '') ?>">
-
-      <p style="margin-top:1rem">
-        <button class="btn" type="submit">Gorde produktua</button>
-      </p>
-    </form>
-  </section>
-</div>
+  <h2>Produktu berria</h2>
+  <form method="post">
+    Izena: <input name="izena" required><br><br>
+    Deskribapena: <input name="deskribapena"><br><br>
+    Prezioa: <input name="prezioa" type="number" step="0.01" required><br><br>
+    Irudia: <input name="irudia" placeholder="te.png"><br><br>
+    <button type="submit">Gorde</button>
+  </form>
 </body>
 </html>
