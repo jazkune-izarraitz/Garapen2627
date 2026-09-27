@@ -2,12 +2,28 @@
 
 Helbidea: `http://localhost/produktuak/`
 
-## Beharrezkoa
-1. Docker MySQL martxan (`mysql-30-0-8`, ataka **3306**, pasahitza `2paag3`)
-2. Karpeta `htdocs/produktuak`-en
-3. Nabigatzailea: `http://localhost/produktuak/`
+## 1. Docker MySQL martxan
+Ataka `3306`, pasahitza `2paag3`.
 
-Datu-basea (`denda`) eta taula (`produktuak`) **PHP-k berak sortzen ditu** lehenengo aldiz kargatzean (`konexioa.php`). Ez da `setup.sql` behar.
+## 2. Datu-basea sortu (`setup.sql`)
+
+**PowerShell** (Windows):
+```powershell
+Get-Content setup.sql | docker exec -i mysql-30-0-8 mysql -uroot -p2paag3
+```
+
+**CMD** edo bash:
+```bat
+docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
+```
+
+> PowerShell-ek ez du onartzen `<` birbideratzea; horregatik `Get-Content ... |`.
+
+## 3. Fitxategiak htdocs-en
+`produktuak` → `C:\xampp\htdocs\produktuak`
+
+## 4. Ireki
+`http://localhost/produktuak/`
 
 ## Kredentzialak (`konexioa.php`)
 - host: `127.0.0.1`
@@ -18,8 +34,9 @@ Datu-basea (`denda`) eta taula (`produktuak`) **PHP-k berak sortzen ditu** lehen
 ## Fitxategiak
 | Fitxategia | Helburua |
 |---|---|
+| `setup.sql` | DB + taula sortu |
+| `konexioa.php` | PDO konexioa |
 | `index.php` | Zerrenda + gehitu + ezabatu + editatu |
 | `xehetasunak.php` | Xehetasunak + itzuli |
 | `editatu.php` | Editatu |
 | `ezabatu.php` | Ezabatu |
-| `konexioa.php` | Konexioa + taula sortu |
