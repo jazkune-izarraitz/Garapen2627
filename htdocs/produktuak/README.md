@@ -1,39 +1,25 @@
-# Produktuak (PHP + MySQL) — ariketa sinplea
+# Produktuak (PHP + MySQL)
 
 Helbidea: `http://localhost/produktuak/`
 
-## 1. Docker MySQL (3306)
+## Beharrezkoa
+1. Docker MySQL martxan (`mysql-30-0-8`, ataka **3306**, pasahitza `2paag3`)
+2. Karpeta `htdocs/produktuak`-en
+3. Nabigatzailea: `http://localhost/produktuak/`
 
-```bash
-docker start mysql-30-0-8
-# edo sortu:
-# docker run -d --name mysql-30-0-8 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=2paag3 mysql:8.0.30
-```
-
-## 2. Datu-basea
-
-```bash
-docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
-```
-
-## 3. Fitxategiak htdocs-en
-
-Kopiatu `produktuak` karpeta → `C:\xampp\htdocs\produktuak` (edo `/opt/lampp/htdocs/produktuak`)
+Datu-basea (`denda`) eta taula (`produktuak`) **PHP-k berak sortzen ditu** lehenengo aldiz kargatzean (`konexioa.php`). Ez da `setup.sql` behar.
 
 ## Kredentzialak (`konexioa.php`)
-
 - host: `127.0.0.1`
 - user: `root`
 - pass: `2paag3`
 - db: `denda`
 
-## Orrialdeak
-
+## Fitxategiak
 | Fitxategia | Helburua |
 |---|---|
 | `index.php` | Zerrenda + gehitu + ezabatu + editatu |
 | `xehetasunak.php` | Xehetasunak + itzuli |
-| `editatu.php` | Editatu (gehigarria) |
+| `editatu.php` | Editatu |
 | `ezabatu.php` | Ezabatu |
-| `konexioa.php` | PDO konexioa |
-| `setup.sql` | DB + taula |
+| `konexioa.php` | Konexioa + taula sortu |
