@@ -1,45 +1,51 @@
 <?php
-// Produktua editatu (gehigarria)
-require 'konexioa.php';
+// Produktua editatu
+require "konexioa.php";
 
-$id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
+// Gorde aldaketak
+if (isset($_POST["gorde"])) {
+    $id = $_POST["id"];
+    $izena = $_POST["izena"];
+    $deskribapena = $_POST["deskribapena"];
+    $prezioa = $_POST["prezioa"];
+    $irudia = $_POST["irudia"];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare('UPDATE produktuak SET izena=?, deskribapena=?, prezioa=?, irudia=? WHERE id=?');
-    $stmt->execute([
-        $_POST['izena'],
-        $_POST['deskribapena'],
-        $_POST['prezioa'],
-        $_POST['irudia'] ?: 'lehenetsia.png',
-        $id,
-    ]);
-    header('Location: index.php');
+    $sql = "UPDATE produktuak SET
+            izena = '$izena',
+            deskribapena = '$deskribapena',
+            prezioa = '$prezioa',
+            irudia = '$irudia'
+            WHERE id = $id";
+    mysqli_query($konexioa, $sql);
+
+    header("Location: index.php");
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT * FROM produktuak WHERE id = ?');
-$stmt->execute([$id]);
-$p = $stmt->fetch();
-if (!$p) {
-    die('Produktua ez da aurkitu.');
-}
+// Formularioa bete
+$id = $_GET["id"];
+$emaitza = mysqli_query($konexioa, "SELECT * FROM produktuak WHERE id = $id");
+$p = mysqli_fetch_assoc($emaitza);
 ?>
 <!DOCTYPE html>
-<html lang="eu">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Editatu</title>
 </head>
 <body>
-  <h1>Editatu produktua</h1>
-  <form method="post">
-    <input type="hidden" name="id" value="<?= $p['id'] ?>">
-    Izena: <input name="izena" value="<?= htmlspecialchars($p['izena']) ?>" required><br><br>
-    Deskribapena: <input name="deskribapena" value="<?= htmlspecialchars($p['deskribapena']) ?>"><br><br>
-    Prezioa: <input name="prezioa" type="number" step="0.01" value="<?= $p['prezioa'] ?>" required><br><br>
-    Irudia: <input name="irudia" value="<?= htmlspecialchars($p['irudia']) ?>"><br><br>
-    <button type="submit">Gorde</button>
-    <a href="index.php">Utzi</a>
-  </form>
+
+<h1>Editatu produktua</h1>
+
+<form method="post">
+  <input type="hidden" name="id" value="<?php echo $p["id"]; ?>">
+  Izena: <input type="text" name="izena" value="<?php echo $p["izena"]; ?>"><br><br>
+  Deskribapena: <input type="text" name="deskribapena" value="<?php echo $p["deskribapena"]; ?>"><br><br>
+  Prezioa: <input type="text" name="prezioa" value="<?php echo $p["prezioa"]; ?>"><br><br>
+  Irudia: <input type="text" name="irudia" value="<?php echo $p["irudia"]; ?>"><br><br>
+  <input type="submit" name="gorde" value="Gorde">
+  <a href="index.php">Utzi</a>
+</form>
+
 </body>
 </html>

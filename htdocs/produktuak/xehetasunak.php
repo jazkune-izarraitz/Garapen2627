@@ -1,29 +1,25 @@
 <?php
-// Produktuaren xehetasunak: izena, deskribapena, irudia, prezioa
-require 'konexioa.php';
+// Produktuaren xehetasunak
+require "konexioa.php";
 
-$id = (int) ($_GET['id'] ?? 0);
-$stmt = $pdo->prepare('SELECT * FROM produktuak WHERE id = ?');
-$stmt->execute([$id]);
-$p = $stmt->fetch();
-
-if (!$p) {
-    die('Produktua ez da aurkitu.');
-}
-
-$irudia = 'irudiak/' . ($p['irudia'] ?: 'lehenetsia.png');
+$id = $_GET["id"];
+$emaitza = mysqli_query($konexioa, "SELECT * FROM produktuak WHERE id = $id");
+$p = mysqli_fetch_assoc($emaitza);
 ?>
 <!DOCTYPE html>
-<html lang="eu">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title><?= htmlspecialchars($p['izena']) ?></title>
+  <title>Xehetasunak</title>
 </head>
 <body>
-  <h1><?= htmlspecialchars($p['izena']) ?></h1>
-  <p><strong>Prezioa:</strong> <?= number_format($p['prezioa'], 2) ?> €</p>
-  <p><strong>Deskribapena:</strong> <?= htmlspecialchars($p['deskribapena']) ?></p>
-  <p><img src="<?= htmlspecialchars($irudia) ?>" alt="" width="200"></p>
-  <p><a href="index.php">← Zerrendara itzuli</a></p>
+
+<h1><?php echo $p["izena"]; ?></h1>
+<p>Prezioa: <?php echo $p["prezioa"]; ?> €</p>
+<p>Deskribapena: <?php echo $p["deskribapena"]; ?></p>
+<p><img src="irudiak/<?php echo $p["irudia"]; ?>" width="200"></p>
+
+<p><a href="index.php">Zerrendara itzuli</a></p>
+
 </body>
 </html>
