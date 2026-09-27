@@ -14,18 +14,18 @@ Fitxategi hauek **htdocs/produktuak** karpetan egon behar dute (XAMPP: `C:\xampp
 
 ## Docker MySQL (`mysql-30-0-8`)
 
-Aplikazioak **3306** atakan dagoen MySQL edukiontzia erabiltzen du:
+Aplikazioak **3306** atakan dagoen MySQL edukiontzia erabiltzen du (pasahitza: `2paag3`):
 
 ```bash
 docker run -d --name mysql-30-0-8 -p 3306:3306 \
-  -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_ROOT_PASSWORD=2paag3 \
   mysql:8.0.30
 ```
 
 Datu-basea sortu:
 
 ```bash
-docker exec -i mysql-30-0-8 mysql -uroot -proot < setup.sql
+docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
 ```
 
 ### Kredentzialak (`konexioa.php`)
@@ -35,8 +35,8 @@ docker exec -i mysql-30-0-8 mysql -uroot -proot < setup.sql
 | Ostalaria | `127.0.0.1` |
 | Ataka | `3306` |
 | Datu-basea | `denda` |
-| Erabiltzailea | `denda` |
-| Pasahitza | `denda123` |
+| Erabiltzailea | `root` |
+| Pasahitza | `2paag3` |
 
 ## Orrialdeak
 

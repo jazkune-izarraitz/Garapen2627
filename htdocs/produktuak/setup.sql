@@ -1,16 +1,12 @@
 -- Denda datu-basea eta produktuak taula
 -- Exekutatu Docker MySQL-n, adibidez:
---   docker exec -i mysql-30-0-8 mysql -uroot -proot < setup.sql
+--   docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
 -- edo ostalarian:
---   mysql -h127.0.0.1 -P3306 -uroot -proot < setup.sql
+--   mysql -h127.0.0.1 -P3306 -uroot -p2paag3 < setup.sql
 
 CREATE DATABASE IF NOT EXISTS denda
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-
-CREATE USER IF NOT EXISTS 'denda'@'%' IDENTIFIED BY 'denda123';
-GRANT ALL PRIVILEGES ON denda.* TO 'denda'@'%';
-FLUSH PRIVILEGES;
 
 USE denda;
 
