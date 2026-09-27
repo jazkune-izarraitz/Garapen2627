@@ -1,8 +1,8 @@
 -- Denda DB + produktuak taula
 -- PowerShell:
---   Get-Content setup.sql | docker exec -i mysql-30-0-8 mysql -uroot -p2paag3
+--   Get-Content setup.sql | docker exec -i mysql-8-0-30 mysql -uroot -p2paag3
 -- CMD / bash:
---   docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
+--   docker exec -i mysql-8-0-30 mysql -uroot -p2paag3 < setup.sql
 
 CREATE DATABASE IF NOT EXISTS denda CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE denda;

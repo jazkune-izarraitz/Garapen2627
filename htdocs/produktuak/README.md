@@ -9,12 +9,12 @@ Ataka `3306`, pasahitza `2paag3`.
 
 **PowerShell** (Windows):
 ```powershell
-Get-Content setup.sql | docker exec -i mysql-30-0-8 mysql -uroot -p2paag3
+Get-Content setup.sql | docker exec -i mysql-8-0-30 mysql -uroot -p2paag3
 ```
 
 **CMD** edo bash:
 ```bat
-docker exec -i mysql-30-0-8 mysql -uroot -p2paag3 < setup.sql
+docker exec -i mysql-8-0-30 mysql -uroot -p2paag3 < setup.sql
 ```
 
 > PowerShell-ek ez du onartzen `<` birbideratzea; horregatik `Get-Content ... |`.
