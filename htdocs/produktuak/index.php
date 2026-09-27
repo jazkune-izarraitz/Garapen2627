@@ -3,7 +3,7 @@
 require "konexioa.php";
 
 // Produktu berria gorde
-if (isset($_POST["gorde"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $izena = $_POST["izena"];
     $deskribapena = $_POST["deskribapena"];
     $prezioa = $_POST["prezioa"];
@@ -54,11 +54,11 @@ while ($p = mysqli_fetch_assoc($emaitza)) {
 
 <h2>Produktu berria</h2>
 <form method="post">
-  Izena: <input type="text" name="izena"><br><br>
-  Deskribapena: <input type="text" name="deskribapena"><br><br>
-  Prezioa: <input type="text" name="prezioa"><br><br>
-  Irudia: <input type="text" name="irudia"><br><br>
-  <input type="submit" name="gorde" value="Gorde">
+  Izena: <input name="izena"><br><br>
+  Deskribapena: <input name="deskribapena"><br><br>
+  Prezioa: <input name="prezioa"><br><br>
+  Irudia: <input name="irudia"><br><br>
+  <button type="submit">Gorde</button>
 </form>
 
 </body>
