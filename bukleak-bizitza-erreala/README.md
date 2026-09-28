@@ -1,14 +1,9 @@
-# Bukleak bizitza errealean – ariketa praktikoak
+# Bukleak bizitza errealean
 
-Landutako teoria (MIENTRAS, REPETIR, PARA) eta fluxu-diagrama ariketak oinarri hartuta, **testuinguru errealeko problemak** ikasleek Pseint-en edo fluxu-diagrametan ebatz ditzaten.
+Landutako teoria (MIENTRAS, REPETIR, PARA) oinarri hartuta, bizitza errealeko / eskolako testuinguruko problemak.
 
-| Fitxategia | Zertarako |
-|---|---|
-| [ariketak.html](ariketak.html) | Ikasleei banatzeko ariketa-orria (inprimagarria) |
-| [irakaslearentzat.md](irakaslearentzat.md) | Gomendatutako buklea, zailtasuna eta ohar pedagogikoak |
+**Dokumentua:** [Bukleak_bizitza_errealean_ariketak.docx](Bukleak_bizitza_errealean_ariketak.docx)
 
-## Helburuak
-
-- **PARA**: errepikapen kopurua aldez aurretik ezagutzen denean
-- **MIENTRAS**: baldintza hasieran egiaztatzen denean (sentinelak, balidazioa…)
-- **REPETIR**: gutxienez behin egin behar denean (pasahitzak, menua…)
+Dokumentuak bi atal ditu:
+1. **Ikasleen ariketak** (A–E): PARA, MIENTRAS, REPETIR, aukera librea eta erronkak
+2. **Irakaslearentzat** (azken orrialdea): gomendatutako buklea, zailtasuna eta saio-proposamena
