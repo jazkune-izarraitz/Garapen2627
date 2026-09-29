@@ -1,0 +1,32 @@
+/* ============================================================
+   Taldearen estiloak – css/estiloa.css (KANPOKO FITXATEGIA)
+   Ez erabili style="" HTML barnean.
+   ============================================================ */
+
+/* --- Oinarrizko berrezarpena (talde osoa) --- */
+/* TODO: body, margin 0, font-family... */
+
+/* --- Ana – index.html – WEB A mota (adib. bloga / tipografia) --- */
+
+/* --- [Izena] – edukia.html – WEB B mota (adib. kartak / flex) --- */
+.kartak {
+  /* display: flex; gap: ... */
+}
+
+.karta {
+  /* border, border-radius, box-shadow... */
+}
+
+/* --- [Izena] – harremana.html – WEB C mota (adib. formularioa) --- */
+.formularioa {
+  /* max-width, padding... */
+}
+
+/* --- Nabigazioa eta footer (partekatua) --- */
+nav a:hover {
+  /* :hover bat gutxienez */
+}
+
+.botoia {
+  /* index hero botoia */
+}
