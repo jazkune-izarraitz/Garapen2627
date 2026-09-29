@@ -1,12 +1,10 @@
 # Bukleak bizitza errealean
 
-Landutako teoria (MIENTRAS, REPETIR, PARA) oinarri hartuta, bizitza errealeko / eskolako testuinguruko problemak.
+Izarraitz LH formatuko ariketa-orria (PARA dokumentuen itxura: logo, izenburu grisarekin, kutxak).
 
 ## Deskargatu
 
-- [Word (.docx)](Bukleak_bizitza_errealean_ariketak.docx)
-- [PDF](Bukleak_bizitza_errealean_ariketak.pdf)
+- [PDF (paisaia, 2 orrialde)](Bukleak_bizitza_errealean_ariketak.pdf)
+- [Word](Bukleak_bizitza_errealean_ariketak.docx)
 
-Dokumentuak bi atal ditu:
-1. **Ikasleen ariketak** (A–E): PARA, MIENTRAS, REPETIR, aukera librea eta erronkak
-2. **Irakaslearentzat** (azken orrialdea): gomendatutako buklea, zailtasuna eta saio-proposamena
+Edukiak zure azken bertsioan oinarrituta: A PARA · B MIENTRAS · C REPETIR · D aukera librea.
